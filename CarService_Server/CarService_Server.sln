@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarService_Server", "CarService_Server.csproj", "{E0EEAA77-8F2F-4E26-A908-D5ABCF40BB19}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLServerLibrary", "..\SQLServerLibrary\SQLServerLibrary.csproj", "{70B305D8-1D6C-4A66-9832-28D180EA3B4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarService_Client", "..\CarService_Client\CarService_Client.csproj", "{84A2DA56-EE26-4295-A3DD-5B56DCFFF089}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{E0EEAA77-8F2F-4E26-A908-D5ABCF40BB19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0EEAA77-8F2F-4E26-A908-D5ABCF40BB19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0EEAA77-8F2F-4E26-A908-D5ABCF40BB19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70B305D8-1D6C-4A66-9832-28D180EA3B4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70B305D8-1D6C-4A66-9832-28D180EA3B4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70B305D8-1D6C-4A66-9832-28D180EA3B4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70B305D8-1D6C-4A66-9832-28D180EA3B4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84A2DA56-EE26-4295-A3DD-5B56DCFFF089}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84A2DA56-EE26-4295-A3DD-5B56DCFFF089}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84A2DA56-EE26-4295-A3DD-5B56DCFFF089}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84A2DA56-EE26-4295-A3DD-5B56DCFFF089}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

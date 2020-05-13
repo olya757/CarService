@@ -1,13 +1,17 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace SQLServerLibrary.Model
 {
+    
     public class CarOwner
     {
         [Key]
@@ -18,8 +22,11 @@ namespace SQLServerLibrary.Model
         public DateTime Birthday { get; set; }
         public string Phone { get; set; }
 
-        [InverseProperty("CarOwner")]
-        public virtual ICollection<Order> Orders { get; set; }
+        [XmlIgnore]
+        [IgnoreDataMember]
+        [JsonIgnore] 
+        [ForeignKey("CarOwner")]
+        public List<Order> Orders { get; set; }
     }
 
     public enum TypeOfTransmission
@@ -43,9 +50,11 @@ namespace SQLServerLibrary.Model
         public DateTime DateOfFinish { get; set; }
         public int Price { get; set; }
 
-        [ForeignKey("OwnerID")]
-        public virtual CarOwner CarOwner { get; set; }
-        public int OwnerID { get; set; }
+        
+        public int CarOwnerID { get; set; }
+        [ForeignKey("CarOwnerID")]
+        public CarOwner CarOwner { get; set; }
+        
 
     }
 }

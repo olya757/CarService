@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using SQLServerLibrary.DataAccess;
+using SQLServerLibrary.Model;
 
 namespace CarService_Server
 {
@@ -13,6 +15,9 @@ namespace CarService_Server
     {
         public static void Main(string[] args)
         {
+           
+
+
             CreateHostBuilder(args).Build().Run();
         }
 

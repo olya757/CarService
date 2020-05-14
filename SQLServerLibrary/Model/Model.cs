@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace SQLServerLibrary.Model
-{
-    
+{    
+    [Serializable]
     public class CarOwner
     {
         [Key]
@@ -35,7 +35,7 @@ namespace SQLServerLibrary.Model
         rear,
         full
     }
-
+    [Serializable]
     public class Order
     {
         [Key]
@@ -48,11 +48,11 @@ namespace SQLServerLibrary.Model
         public string NameOfWorks { get; set; }
         public DateTime DateOfStart { get; set; }
         public DateTime DateOfFinish { get; set; }
-        public int Price { get; set; }
+        public int Price { get; set; }        
+        public int OwnerID { get; set; }
 
-        
-        public int CarOwnerID { get; set; }
-        [ForeignKey("CarOwnerID")]
+        [IgnoreDataMember]
+        [ForeignKey("OwnerID")]
         public CarOwner CarOwner { get; set; }
         
 

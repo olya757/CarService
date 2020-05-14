@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace CarService_Client.Model
 {
+    [Serializable]
     public class BinaryFileDataAccess:IFileDataAccess
     {
         public string Path { get; set; }
@@ -29,6 +30,10 @@ namespace CarService_Client.Model
             {
                 result = new AutoServiceModel(this);
             }
+            finally
+            {
+                fs.Close();
+            }
             return result;
         }
         public void SetModel(AutoServiceModel autoServiceModel)
@@ -37,6 +42,7 @@ namespace CarService_Client.Model
             // Construct a BinaryFormatter and use it to serialize the data to the stream.
             BinaryFormatter formatter = new BinaryFormatter();
             formatter.Serialize(fs, autoServiceModel);
+            fs.Close();
         }
 
     }

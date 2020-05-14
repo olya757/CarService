@@ -37,9 +37,11 @@ namespace SQLServerLibrary.DataAccess
             {
                 if (db.CarOwners.Any(p => p.ID == id))
                 {
-
-                    db.CarOwners.Remove(db.CarOwners.First(p => p.ID == id));
+                    int cnt = db.CarOwners.Count();
+                    var co = db.CarOwners.First(c => c.ID == id);
+                    db.CarOwners.Remove(co);
                     db.SaveChanges();
+                    int cnt2 = db.CarOwners.Count();
                 }
             }
         }

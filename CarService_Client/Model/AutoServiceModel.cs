@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace CarService_Client.Model
 {
+    [Serializable]
     public class AutoServiceModel:IAutoServiceModel
     {
-        public int iCarOwners = 0;
-        public int iOrders = 0;
+        public int iCarOwners { get; set; }
+        public int iOrders { get; set; }
         public string Path { get; set; }
         public IFileDataAccess fileDataAccess;
 
@@ -22,6 +23,8 @@ namespace CarService_Client.Model
 
         public AutoServiceModel(IFileDataAccess fileDataAccess)
         {
+            iCarOwners = 0;
+            iOrders = 0;
             Path = fileDataAccess.Path;
             CarOwners = new List<CarOwner>();
             Orders = new List<Order>();
@@ -66,7 +69,7 @@ namespace CarService_Client.Model
 
         public List<CarOwner> GetCarOwners()
         {
-            return CarOwners;
+            return CarOwners.ToList();
         }
 
         public CarOwner GetCarOwnerByID(int id)
@@ -85,7 +88,7 @@ namespace CarService_Client.Model
                 ord.CarBrand = order.CarBrand;
                 ord.CarModel = order.CarModel;
                 ord.CarOwner = order.CarOwner;
-                ord.CarOwnerID = order.CarOwnerID;
+                ord.OwnerID = order.OwnerID;
                 ord.DateOfFinish = order.DateOfFinish;
                 ord.DateOfStart = order.DateOfStart;
                 ord.EnginePower = order.EnginePower;

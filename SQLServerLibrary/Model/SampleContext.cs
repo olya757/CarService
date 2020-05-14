@@ -29,7 +29,7 @@ namespace SQLServerLibrary.Model
             modelBuilder.Entity<Order>()
             .HasRequired<CarOwner>(o => o.CarOwner)
             .WithMany(co => co.Orders)
-            .HasForeignKey( o=>o.CarOwnerID);
+            .HasForeignKey( o=>o.OwnerID);
         }
     }
 }

@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace CarService_Client.Model
 {
-    public class AutoServiceModelFromBD : IAutoServiceModel
+    public class AutoServiceModelFromDB : IAutoServiceModel
     {
         private HttpClient httpClient;
-        public AutoServiceModelFromBD()
+        public AutoServiceModelFromDB()
         {
             httpClient = new HttpClient(); 
             httpClient.DefaultRequestHeaders.Accept.Clear();

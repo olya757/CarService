@@ -8,6 +8,7 @@ using System.Xml.Serialization;
 
 namespace CarService_Client.Model
 {
+    [Serializable]
     public class XMLFileDataAccess:IFileDataAccess
     {
         

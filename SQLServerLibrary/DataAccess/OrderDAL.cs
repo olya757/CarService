@@ -33,8 +33,11 @@ namespace SQLServerLibrary.DataAccess
             {
                 if (db.Orders.Any(p => p.ID == id))
                 {
-                    db.Orders.Remove(db.Orders.First(p => p.ID == id));
+                    var order = db.Orders.First(o => o.ID == id);
+                    int cnt = db.Orders.Count();
+                    db.Orders.Remove(order);
                     db.SaveChanges();
+                    int cnt2 = db.Orders.Count();
                 }
             }
         }
@@ -59,7 +62,7 @@ namespace SQLServerLibrary.DataAccess
 
         public static CarOwner GetCarOwner(Order order)
         {
-            return CarOwnerDAL.GetCarOwnerByID(order.CarOwnerID);
+            return CarOwnerDAL.GetCarOwnerByID(order.OwnerID);
         }
     }
 }

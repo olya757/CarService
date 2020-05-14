@@ -3,35 +3,37 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace WebAPI.Models
+namespace CarService_Client.Model
 {
-    public class BinaryFileDataAccess
+    public class BinaryFileDataAccess:IFileDataAccess
     {
-        public static string Path = @"~/App_Data/AutoServiceData.dat";
-        public static AutoServiceModel GetModel()
+        public string Path { get; set; }
+        public BinaryFileDataAccess(string path)
         {
-            var res = System.Web.Hosting.HostingEnvironment.MapPath(Path);
-            FileStream fs = new FileStream(res, FileMode.OpenOrCreate);
+            Path = path;
+        }
+        public AutoServiceModel GetModel()
+        {
+            FileStream fs = new FileStream(Path, FileMode.OpenOrCreate);
             // Construct a BinaryFormatter and use it to serialize the data to the stream.
             BinaryFormatter formatter = new BinaryFormatter();
             AutoServiceModel result;
             try
             {
                 result = (AutoServiceModel)formatter.Deserialize(fs);
-                
             }
             catch (Exception e)
             {
-                result = new AutoServiceModel();
+                result = new AutoServiceModel(this);
             }
             return result;
         }
-        public static void SetModel(AutoServiceModel autoServiceModel)
+        public void SetModel(AutoServiceModel autoServiceModel)
         {
-            var res = System.Web.Hosting.HostingEnvironment.MapPath(Path);
-            FileStream fs = new FileStream(res, FileMode.OpenOrCreate);
+            FileStream fs = new FileStream(Path, FileMode.OpenOrCreate);
             // Construct a BinaryFormatter and use it to serialize the data to the stream.
             BinaryFormatter formatter = new BinaryFormatter();
             formatter.Serialize(fs, autoServiceModel);

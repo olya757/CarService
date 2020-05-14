@@ -1,41 +1,46 @@
-﻿using SQLServerLibrary.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace WebAPI.Models
+namespace CarService_Client.Model
 {
-    public class XMLFileDataAccess
+    public class XMLFileDataAccess:IFileDataAccess
     {
-        public static string Path = @"~/App_Data/AutoServiceData.xml";
-        public static AutoServiceModel GetModel()
+        
+
+        public string Path { get; set; }
+        public XMLFileDataAccess(string path)
+        {
+            Path = path;
+        }
+        public AutoServiceModel GetModel()
         {
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(AutoServiceModel));
             AutoServiceModel result;
             try
             {
-                var res = System.Web.Hosting.HostingEnvironment.MapPath(Path);
-                using (Stream reader = new FileStream(res, FileMode.Open))
+                
+                using (Stream reader = new FileStream(Path, FileMode.Open))
                 {
                     // Call the Deserialize method to restore the object's state.
                     result = (AutoServiceModel)xmlSerializer.Deserialize(reader);
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                result = new AutoServiceModel();
+                result = new AutoServiceModel(this);
             }
             return result;
         }
 
-        public static void SetModel(AutoServiceModel autoServiceModel)
+        public void SetModel(AutoServiceModel autoServiceModel)
         {
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(AutoServiceModel));
-            var res = System.Web.Hosting.HostingEnvironment.MapPath(Path);
-            using (Stream writer = new FileStream(res, FileMode.OpenOrCreate))
+            using (Stream writer = new FileStream(Path, FileMode.OpenOrCreate))
             {
                 // Call the Deserialize method to restore the object's state.
                 xmlSerializer.Serialize(writer, autoServiceModel);

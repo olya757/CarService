@@ -1,0 +1,111 @@
+﻿<Window x:Class="CarService_Client.View.OrderFormWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarService_Client.View"
+        mc:Ignorable="d"
+        Title="OrderFormWindow" Height="450" Width="800">
+    <Grid>
+
+          <Grid Background="White" Margin="15" >
+            <Grid.Resources>
+                <Style TargetType="TextBox">
+                    <Setter Property="Margin" Value="0 5 0 5"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="Padding" Value="5 3"/>
+                    
+                </Style>
+                <Style TargetType="Label">
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                </Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="Foreground" Value="#882288"/>
+                    <Setter Property="FontSize" Value="15"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                </Style>
+            </Grid.Resources>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="160"></ColumnDefinition>
+                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                        <ColumnDefinition Width="50"></ColumnDefinition>
+                        <ColumnDefinition Width="160"></ColumnDefinition>
+                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+                            <Run>Информация о заказе №</Run>
+                            <Run Text="{Binding ID}"></Run>
+                    </TextBlock>
+                    <TextBlock Text="Информация о владельце авто" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+                    </TextBlock>
+
+                    <Label Grid.Row="1" Grid.Column="0" Content="Марка авто"></Label>
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CarBrand}"></TextBox>
+
+                    <Label Grid.Row="2" Grid.Column="0" Content="Модель авто"></Label>
+                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding CarModel}"></TextBox>
+
+                    <Label Grid.Row="3" Grid.Column="0" Content="Год выпуска"></Label>
+                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding YearOfManufacture}"></TextBox>
+
+                    <Label Grid.Row="4" Grid.Column="0" Content="Тип трансмиссии"></Label>
+                    <ComboBox Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Padding="5 3" Margin="0 5 0 5" ItemsSource="{Binding TypesOfTransmission}" SelectedItem="{Binding TypeOfTransmission}" ></ComboBox>
+
+                    <Label Grid.Row="5" Grid.Column="0" Content="Мощность двигателя (л.с.)"></Label>
+                    <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding CarBrand}"></TextBox>
+
+                    <Label Grid.Row="6" Grid.Column="0" Content="Наименование работ"></Label>
+                    <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding CarBrand}"></TextBox>
+
+                    <Label Grid.Row="7" Grid.Column="0" Content="Время начала работ"></Label>
+                    <StackPanel VerticalAlignment="Center" Grid.Row="7" Grid.Column="1">
+                        <DatePicker SelectedDateFormat="Long" SelectedDate="{Binding DateOfStart}"/>
+                    </StackPanel>
+
+            <Label Grid.Row="8" Grid.Column="0" Content="Время окончания работ"></Label>
+            <StackPanel VerticalAlignment="Center" Grid.Row="8" Grid.Column="1">
+                <DatePicker SelectedDateFormat="Long" SelectedDate="{Binding DateOfFinish}"/>
+            </StackPanel>
+
+            <Label Grid.Row="9" Grid.Column="0" Content="Стоимость работ"></Label>
+                    <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding Price}"></TextBox>
+
+                    <Label Grid.Row="1" Grid.Column="3" Content="Фамилия"></Label>
+                    <TextBox Grid.Row="1" Grid.Column="4" Text="{Binding Surname}"></TextBox>
+
+                    <Label Grid.Row="2" Grid.Column="3" Content="Имя"></Label>
+                    <TextBox Grid.Row="2" Grid.Column="4" Text="{Binding Name}"></TextBox>
+
+                    <Label Grid.Row="3" Grid.Column="3" Content="Отчество"></Label>
+                    <TextBox Grid.Row="3" Grid.Column="4" Text="{Binding SecondName}"></TextBox>
+
+                    <Label Grid.Row="4" Grid.Column="3" Content="Дата рождения"></Label>
+            <StackPanel VerticalAlignment="Center" Grid.Row="4" Grid.Column="4">
+                <DatePicker SelectedDateFormat="Long" SelectedDate="{Binding Birthday}"/>
+            </StackPanel>
+
+            <Label Grid.Row="5" Grid.Column="3" Content="Телефон"></Label>
+            <TextBox Grid.Row="5" Grid.Column="4" Text="{Binding Phone, StringFormat={}{+7:(###)###-####}}"></TextBox>
+
+                    <StackPanel Grid.Row="10" Grid.Column="4" Height="Auto" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Grid.Column="4" Grid.Row="10" Content="Отмена" Width="Auto" VerticalAlignment="Center" Height="Auto" Padding="10 5" Margin="0 0 10 0"></Button>
+                        <Button Grid.Column="4" Grid.Row="10" Content="Сохранить" Width="Auto" VerticalAlignment="Center" Height="Auto" Padding="10 5" ></Button>
+                    </StackPanel>
+                </Grid>
+    </Grid>
+</Window>

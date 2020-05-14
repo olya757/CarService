@@ -1,0 +1,55 @@
+﻿<Window x:Class="CarService_Client.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarService_Client.View"
+        mc:Ignorable="d"
+        Title="MainWindow" Width="{DynamicResource {x:Static SystemParameters.MaximizedPrimaryScreenWidthKey}}" Height="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
+            <ComboBox Margin="5" ItemsSource="{Binding Sources}" SelectedItem="{Binding SelectedSource}"></ComboBox>
+            <Button Margin="5" Width="Auto" Height="Auto" HorizontalAlignment="Right" Content="Загрузить данные"></Button>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Margin="5" Content="Добавить запись"></Button>
+            <Button Margin="5" Content="Удалить запись"></Button>
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <DataGrid x:Name="dgOrders" ScrollViewer.HorizontalScrollBarVisibility="Auto" AutoGenerateColumns="False" Grid.Row="1" ItemsSource="{Binding SelectedSource.Orders}" SelectedItem="{Binding SelectedSource.SelectedOrder}" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ID, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Марка авто" Binding="{Binding CarBrand}"/>
+                <DataGridTextColumn Header="Модель авто" Binding="{Binding CarModel}"/>
+                <DataGridTextColumn Header="Год выпуска" Binding="{Binding YearOfManufacture}"/>
+                <DataGridComboBoxColumn Header="Тип трансмисии" ItemsSource="{Binding TypesOfTransmission}" SelectedItemBinding="{Binding TypeOfTransmission}"/>
+                <DataGridTextColumn Header="Мощность двигателя (л.с.)" Binding="{Binding EnginePower}"/>
+                <DataGridTextColumn Header="Наименование работ" Binding="{Binding NameOfWorks}"/>
+                <DataGridTemplateColumn Header="Время начала работ">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>                               
+                                <DatePicker SelectedDate="{Binding DateOfStart}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Время окончания работ">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>                                
+                                <DatePicker SelectedDateFormat="Long" SelectedDate="{Binding DateOfFinish}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Стоимость работ (руб.)" Binding="{Binding Price}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        </Grid>
+    </Grid>
+</Window>

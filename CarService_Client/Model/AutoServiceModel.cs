@@ -2,19 +2,30 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace WebAPI.Models
+namespace CarService_Client.Model
 {
-    public class AutoServiceModel
+    public class AutoServiceModel:IAutoServiceModel
     {
         public int iCarOwners = 0;
         public int iOrders = 0;
+        public string Path { get; set; }
+        public IFileDataAccess fileDataAccess;
 
         public AutoServiceModel()
         {
             CarOwners = new List<CarOwner>();
             Orders = new List<Order>();
+        }
+
+        public AutoServiceModel(IFileDataAccess fileDataAccess)
+        {
+            Path = fileDataAccess.Path;
+            CarOwners = new List<CarOwner>();
+            Orders = new List<Order>();
+            this.fileDataAccess = fileDataAccess;
         }
 
         public List<CarOwner> CarOwners { get; set; }
@@ -37,6 +48,7 @@ namespace WebAPI.Models
                 carOwner.ID = iCarOwners;
                 CarOwners.Add(carOwner);
             }
+            fileDataAccess.SetModel(this);
         }
 
         public void UpdateCarOwner(CarOwner carOwner, int id)
@@ -47,8 +59,9 @@ namespace WebAPI.Models
 
         public void DeleteCarOwner(int id)
         {
-            if(CarOwners.Any(p => p.ID==id))
+            if (CarOwners.Any(p => p.ID == id))
                 CarOwners.Remove(CarOwners.First(p => p.ID == id));
+            fileDataAccess.SetModel(this);
         }
 
         public List<CarOwner> GetCarOwners()
@@ -58,7 +71,7 @@ namespace WebAPI.Models
 
         public CarOwner GetCarOwnerByID(int id)
         {
-            if(CarOwners.Any(p=>p.ID==id))
+            if (CarOwners.Any(p => p.ID == id))
                 return CarOwners.First(p => p.ID == id);
             return null;
         }
@@ -80,13 +93,13 @@ namespace WebAPI.Models
                 ord.TypeOfTransmission = order.TypeOfTransmission;
                 ord.YearOfManufacture = order.YearOfManufacture;
             }
-            else            
+            else
             {
                 iOrders++;
                 order.ID = iOrders;
                 Orders.Add(order);
             }
-                
+            fileDataAccess.SetModel(this);
         }
 
         public void UpdateOrder(Order order, int id)
@@ -97,8 +110,9 @@ namespace WebAPI.Models
 
         public void DeleteOrder(int id)
         {
-            if(Orders.Any(p=>p.ID==id))
-                Orders.Remove(Orders.First(p => p.ID == id));                    
+            if (Orders.Any(p => p.ID == id))
+                Orders.Remove(Orders.First(p => p.ID == id));
+            fileDataAccess.SetModel(this);
         }
 
         public List<Order> GetOrders()
@@ -109,8 +123,8 @@ namespace WebAPI.Models
         public Order GetOrderByID(int id)
         {
             if (Orders.Any(p => p.ID == id))
-                    return Orders.First(p => p.ID == id);
-                return null;
+                return Orders.First(p => p.ID == id);
+            return null;
         }
 
     }

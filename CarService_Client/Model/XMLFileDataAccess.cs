@@ -10,8 +10,7 @@ namespace CarService_Client.Model
 {
     [Serializable]
     public class XMLFileDataAccess:IFileDataAccess
-    {
-        
+    { 
 
         public string Path { get; set; }
         public XMLFileDataAccess(string path)
@@ -29,11 +28,13 @@ namespace CarService_Client.Model
                 {
                     // Call the Deserialize method to restore the object's state.
                     result = (AutoServiceModel)xmlSerializer.Deserialize(reader);
+                    result.fileDataAccess = this;
                 }
             }
             catch (Exception e)
             {
                 result = new AutoServiceModel(this);
+                result.fileDataAccess = this;
             }
             return result;
         }

@@ -12,7 +12,7 @@ namespace CarService_Client.Model
         public static IFileDataAccess GetFileDataAccess(string path)
         {
             FileInfo fileInfo = new FileInfo(path);
-            if (fileInfo.Extension == "xml")
+            if (fileInfo.Extension == ".xml")
             {
                 return new XMLFileDataAccess(path);
             }

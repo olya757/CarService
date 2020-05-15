@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace CarService_Client.Model
 {
@@ -13,6 +14,8 @@ namespace CarService_Client.Model
         public int iCarOwners { get; set; }
         public int iOrders { get; set; }
         public string Path { get; set; }
+
+        [XmlIgnore]
         public IFileDataAccess fileDataAccess;
 
         public AutoServiceModel()

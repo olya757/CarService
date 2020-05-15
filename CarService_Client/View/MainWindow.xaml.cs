@@ -37,9 +37,9 @@ namespace CarService_Client.View
             //AutoServiceModel autoServiceModel_dat = fileDataAccess_dat.GetModel();
             //GenerateDataForModel(autoServiceModel_dat,905);
 
-            //var fileDataAccess_xml = FileDataAccessCreator.GetFileDataAccess(@"../../Data/AutoServiceData.xml");
-            //AutoServiceModel autoServiceModel_xml = fileDataAccess_xml.GetModel();
-            //GenerateDataForModel(autoServiceModel_xml,920);
+            var fileDataAccess_xml = FileDataAccessCreator.GetFileDataAccess(@"../../Data/AutoServiceData.xml");
+            AutoServiceModel autoServiceModel_xml = fileDataAccess_xml.GetModel();
+            GenerateDataForModel(autoServiceModel_xml,920);
         }
 
 

@@ -41,6 +41,7 @@ namespace CarService_Client.ViewModel
         {
             var id = order.ID;
             AutoServiceModel.AddOrder(order);
+            //чтобы получить правильный ID
             if (id == 0)
             {
                 var cos = AutoServiceModel.GetOrders();

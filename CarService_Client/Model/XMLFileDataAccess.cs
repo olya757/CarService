@@ -33,8 +33,7 @@ namespace CarService_Client.Model
             }
             catch (Exception e)
             {
-                result = new AutoServiceModel(this);
-                result.fileDataAccess = this;
+                throw new Exception("Не удалось получить доступ к базе данных");
             }
             return result;
         }

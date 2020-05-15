@@ -17,11 +17,15 @@ namespace CarService_Client.Commands
             this.indexCarOwnerViewModel = indexCarOwnerViewModel;
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            return !(indexCarOwnerViewModel is null);
         }
 
         public void Execute(object parameter)

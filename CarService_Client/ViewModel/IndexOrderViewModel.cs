@@ -99,6 +99,13 @@ namespace CarService_Client.ViewModel
             {
 
             }
+            else
+            {
+                if (CurrentOrder.ID == 0)
+                {
+                    Orders.Remove(CurrentOrder);
+                }               
+            }
         }
     }
 }

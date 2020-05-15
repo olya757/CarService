@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CarService_Client.ViewModel
 {
@@ -40,7 +41,7 @@ namespace CarService_Client.ViewModel
             Sources.Add("AutoServiceData.dat");
             SourcesDict = new Dictionary<string, IAutoServiceModel>();
             SourcesDict[Sources[0]] = new AutoServiceModelFromDB();
-            SourcesDict[Sources[1]] =FileDataAccessCreator.GetFileDataAccess(@"../../Data/AutoServiceData.xml").GetModel();
+            SourcesDict[Sources[1]] = FileDataAccessCreator.GetFileDataAccess(@"../../Data/AutoServiceData.xml").GetModel();
             SourcesDict[Sources[2]] = FileDataAccessCreator.GetFileDataAccess(@"../../Data/AutoServiceData.dat").GetModel();
             CurrentSource = Sources[0];
             LoadSelectedSourceCommand = new LoadSelectedSourceCommand(this);
@@ -57,10 +58,18 @@ namespace CarService_Client.ViewModel
         }
 
         public void LoadSelectedOrders()
-        {
-            LoadedSource = CurrentSource;
-            IndexOrderViewModel = new IndexOrderViewModel(SourcesDict[CurrentSource]);
-            OnPropertyChanged(nameof(IndexOrderViewModel));
+        {            
+            try
+            {
+                IndexOrderViewModel = new IndexOrderViewModel(SourcesDict[CurrentSource]);
+                LoadedSource = CurrentSource;
+
+                OnPropertyChanged(nameof(IndexOrderViewModel));
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
     }
 }

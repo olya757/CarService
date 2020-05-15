@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
-
+using System.Windows;
 
 namespace CarService_Client.Model
 {
@@ -76,21 +76,28 @@ namespace CarService_Client.Model
 
         public List<CarOwner> GetCarOwners()
         {
-            var request = httpClient.GetAsync("CarOwner");
-            request.Wait();
-            if (request.Result.IsSuccessStatusCode)
+            try
             {
-                try
+                var request = httpClient.GetAsync("CarOwner");
+                request.Wait();
+                if (request.Result.IsSuccessStatusCode)
                 {
-                    var responce = request.Result.Content.ReadAsAsync<List<CarOwner>>();
-                    responce.Wait();
-                    var result = responce.Result;
-                    return result;
+                    try
+                    {
+                        var responce = request.Result.Content.ReadAsAsync<List<CarOwner>>();
+                        responce.Wait();
+                        var result = responce.Result;
+                        return result;
+                    }
+                    catch (Exception e)
+                    {
+                        return null;
+                    }
                 }
-                catch (Exception e)
-                {
-                    return null;
-                }
+            }
+            catch(Exception e)
+            {
+                throw new Exception("Не удалось получить доступ к базе данных");
             }
             return null;
         }
@@ -118,21 +125,28 @@ namespace CarService_Client.Model
 
         public List<Order> GetOrders()
         {
-            var request = httpClient.GetAsync("Order");
-            request.Wait();
-            if (request.Result.IsSuccessStatusCode)
+            try
             {
-                try
+                var request = httpClient.GetAsync("Order");
+                request.Wait();
+                if (request.Result.IsSuccessStatusCode)
                 {
-                    var responce = request.Result.Content.ReadAsAsync<List<Order>>();
-                    responce.Wait();
-                    var result = responce.Result;
-                    return result;
+                    try
+                    {
+                        var responce = request.Result.Content.ReadAsAsync<List<Order>>();
+                        responce.Wait();
+                        var result = responce.Result;
+                        return result;
+                    }
+                    catch (Exception e)
+                    {
+                        return null;
+                    }
                 }
-                catch (Exception e)
-                {
-                    return null;
-                }
+            }
+            catch(Exception e)
+            {
+                throw new Exception("Не удалось получить доступ к базе данных");
             }
             return null;
         }

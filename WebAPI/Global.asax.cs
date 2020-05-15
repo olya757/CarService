@@ -26,8 +26,8 @@ namespace WebAPI
             //config.Formatters.XmlFormatter.MaxDepth = 2;
 
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            //RouteConfig.RegisterRoutes(RouteTable.Routes);
+            //BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
 }

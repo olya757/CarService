@@ -24,7 +24,7 @@ namespace WebAPI.Controllers
         }
 
         // POST api/values
-        public void Post([FromBody]CarOwner value)
+        public void Post([FromBody] CarOwner value)
         {
             CarOwnerDAL.AddCarOwner(value);
         }

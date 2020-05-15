@@ -1,4 +1,5 @@
 ﻿using CarService_Client.Model;
+using CarService_Client.ViewModel;
 using SQLServerLibrary.Model;
 using System;
 using System.Collections.Generic;
@@ -24,21 +25,21 @@ namespace CarService_Client.View
         public MainWindow()
         {
             InitializeComponent();
-            //CreateData();
+            CreateData();
         }
 
         private static void CreateData()
         {
-            //AutoServiceModelFromDB autoServiceModel_db = new AutoServiceModelFromDB();
-            //GenerateDataForModel(autoServiceModel_db,960);
+            AutoServiceModelFromDB autoServiceModel_db = new AutoServiceModelFromDB();
+            GenerateDataForModel(autoServiceModel_db,960);
 
             //var fileDataAccess_dat = FileDataAccessCreator.GetFileDataAccess(@"../../Data/AutoServiceData.dat");
             //AutoServiceModel autoServiceModel_dat = fileDataAccess_dat.GetModel();
             //GenerateDataForModel(autoServiceModel_dat,905);
 
-            var fileDataAccess_xml = FileDataAccessCreator.GetFileDataAccess(@"../../Data/AutoServiceData.xml");
-            AutoServiceModel autoServiceModel_xml = fileDataAccess_xml.GetModel();
-            GenerateDataForModel(autoServiceModel_xml,920);
+            //var fileDataAccess_xml = FileDataAccessCreator.GetFileDataAccess(@"../../Data/AutoServiceData.xml");
+            //AutoServiceModel autoServiceModel_xml = fileDataAccess_xml.GetModel();
+            //GenerateDataForModel(autoServiceModel_xml,920);
         }
 
 
@@ -94,6 +95,11 @@ namespace CarService_Client.View
                 order.OwnerID = carOwners[random.Next(0, carOwners.Count())].ID;
                 autoServiceModel.AddOrder(order);
             }            
+        }
+
+        private void dgOrders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ((SourceManagerViewModel)this.DataContext).IndexOrderViewModel.OpenOrderForm();
         }
     }
 }

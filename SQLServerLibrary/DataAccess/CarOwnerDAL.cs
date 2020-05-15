@@ -1,6 +1,7 @@
 ﻿using SQLServerLibrary.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Core.Objects.DataClasses;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace SQLServerLibrary.DataAccess
             {
                 if (db.CarOwners.Any(p => p.ID == carOwner.ID))
                 {
-                    db.Entry(carOwner).State = System.Data.Entity.EntityState.Modified;
+                    db.Entry(carOwner).State = EntityState.Modified;
                 }
                 else
                     db.CarOwners.Add(carOwner);

@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json;
+
 
 namespace CarService_Client.Model
 {
@@ -20,7 +22,7 @@ namespace CarService_Client.Model
         }
         public void AddCarOwner(CarOwner carOwner)
         {
-            var json = JsonConvert.SerializeObject(carOwner);
+            var json = System.Text.Json.JsonSerializer.Serialize(carOwner);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
             var request = httpClient.PostAsync("CarOwner", data);
             request.Wait();
@@ -29,7 +31,8 @@ namespace CarService_Client.Model
 
         public void AddOrder(Order order)
         {
-            var json = JsonConvert.SerializeObject(order);
+            var json = System.Text.Json.JsonSerializer.Serialize(order);
+            //var json = JsonConvert.SerializeObject(order);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
             var request = httpClient.PostAsync("Order", data);
             request.Wait();

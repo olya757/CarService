@@ -25,13 +25,13 @@ namespace CarService_Client.View
         public MainWindow()
         {
             InitializeComponent();
-            CreateData();
+            //CreateData();
         }
 
         private static void CreateData()
         {
-            AutoServiceModelFromDB autoServiceModel_db = new AutoServiceModelFromDB();
-            GenerateDataForModel(autoServiceModel_db,960);
+            //AutoServiceModelFromDB autoServiceModel_db = new AutoServiceModelFromDB();
+            //GenerateDataForModel(autoServiceModel_db,960);
 
             //var fileDataAccess_dat = FileDataAccessCreator.GetFileDataAccess(@"../../Data/AutoServiceData.dat");
             //AutoServiceModel autoServiceModel_dat = fileDataAccess_dat.GetModel();

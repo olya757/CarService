@@ -1,4 +1,5 @@
-﻿using CarService.DataAccess.Model;
+﻿using CarService.DataAccess.DTO;
+using CarService.DataAccess.Model;
 using CarService.DesktopClient.Commands;
 using CarService.DesktopClient.Model;
 using CarService.DesktopClient.View;
@@ -16,18 +17,18 @@ namespace CarService.DesktopClient.ViewModel
 {
     public class OrderViewModel : ViewModel
     {
-        private Order order;
+        private OrderDTO order;
 
         public OrderViewModel()
         {
-            this.order = new Order();
+            this.order = new OrderDTO();
             this.order.YearOfManufacture = 1990;
             this.order.DateOfStart = DateTime.Now;
             this.order.DateOfFinish = DateTime.Now;
             Init();
         }
 
-        public OrderViewModel(Order order)
+        public OrderViewModel(OrderDTO order)
         {
             this.order = order;
             Init();

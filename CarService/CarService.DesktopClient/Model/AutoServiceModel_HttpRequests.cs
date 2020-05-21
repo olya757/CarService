@@ -1,4 +1,5 @@
-﻿using CarService.DataAccess.Model;
+﻿using CarService.DataAccess.DTO;
+using CarService.DataAccess.Model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace CarService.DesktopClient.Model
             Source = source;
         }
 
-        public static void AddCarOwner(CarOwner carOwner)
+        public static void AddCarOwner(CarOwnerDTO carOwner)
         {
             var json = System.Text.Json.JsonSerializer.Serialize(carOwner);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
@@ -36,7 +37,7 @@ namespace CarService.DesktopClient.Model
             var responce = request.Result;
         }
 
-        public static void AddOrder(Order order)
+        public static void AddOrder(OrderDTO order)
         {
             var json = System.Text.Json.JsonSerializer.Serialize(order);
             //var json = JsonConvert.SerializeObject(order);
@@ -60,7 +61,7 @@ namespace CarService.DesktopClient.Model
             var responce = request.Result;
         }
 
-        public static CarOwner GetCarOwnerByID(int id)
+        public static CarOwnerDTO GetCarOwnerByID(int id)
         {
             var request = httpClient.GetAsync($"CarOwner/{Source}/{id}");
             request.Wait();
@@ -68,7 +69,7 @@ namespace CarService.DesktopClient.Model
             {
                 try
                 {
-                    var responce = request.Result.Content.ReadAsAsync<CarOwner>();
+                    var responce = request.Result.Content.ReadAsAsync<CarOwnerDTO>();
                     responce.Wait();
                     var result = responce.Result;
                     return result;
@@ -81,7 +82,7 @@ namespace CarService.DesktopClient.Model
             return null;
         }
 
-        public static List<CarOwner> GetCarOwners()
+        public static List<CarOwnerDTO> GetCarOwners()
         {
             try
             {
@@ -91,7 +92,7 @@ namespace CarService.DesktopClient.Model
                 {
                     try
                     {
-                        var responce = request.Result.Content.ReadAsAsync<List<CarOwner>>();
+                        var responce = request.Result.Content.ReadAsAsync<List<CarOwnerDTO>>();
                         responce.Wait();
                         var result = responce.Result;
                         return result;
@@ -109,7 +110,7 @@ namespace CarService.DesktopClient.Model
             return null;
         }
 
-        public static Order GetOrderByID(int id)
+        public static OrderDTO GetOrderByID(int id)
         {
             var request = httpClient.GetAsync($"Order/{Source}/{id}");
             request.Wait();
@@ -117,7 +118,7 @@ namespace CarService.DesktopClient.Model
             {
                 try
                 {
-                    var responce = request.Result.Content.ReadAsAsync<Order>();
+                    var responce = request.Result.Content.ReadAsAsync<OrderDTO>();
                     responce.Wait();
                     var result = responce.Result;
                     return result;
@@ -130,7 +131,7 @@ namespace CarService.DesktopClient.Model
             return null;
         }
 
-        public static List<Order> GetOrders()
+        public static List<OrderDTO> GetOrders()
         {
             try
             {
@@ -140,7 +141,7 @@ namespace CarService.DesktopClient.Model
                 {
                     try
                     {
-                        var responce = request.Result.Content.ReadAsAsync<List<Order>>();
+                        var responce = request.Result.Content.ReadAsAsync<List<OrderDTO>>();
                         responce.Wait();
                         var result = responce.Result;
                         return result;
@@ -158,7 +159,7 @@ namespace CarService.DesktopClient.Model
             return null;
         }
 
-        public static void UpdateCarOwner(CarOwner carOwner, int id)
+        public static void UpdateCarOwner(CarOwnerDTO carOwner, int id)
         {
             var json = JsonConvert.SerializeObject(carOwner);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
@@ -167,7 +168,7 @@ namespace CarService.DesktopClient.Model
             var responce = request.Result;
         }
 
-        public static void UpdateOrder(Order order, int id)
+        public static void UpdateOrder(OrderDTO order, int id)
         {
             var json = JsonConvert.SerializeObject(order);
             var data = new StringContent(json, Encoding.UTF8, "application/json");

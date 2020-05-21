@@ -1,4 +1,5 @@
 ﻿using CarService.DataAccess.DataAccess;
+using CarService.DataAccess.DTO;
 using CarService.DataAccess.Source;
 using Ninject.Modules;
 using System;
@@ -18,6 +19,7 @@ namespace CarService.WebService.App_Start
 
         public override void Load()
         {
+            Bind<IDataRepository>().To<DataRepository>();
             switch (Source)
             {
                 case 1:

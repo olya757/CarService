@@ -1,4 +1,5 @@
 ﻿using CarService.DataAccess.DataAccess;
+using CarService.DataAccess.DTO;
 using CarService.DataAccess.Model;
 using CarService.WebService.App_Start;
 using Ninject;
@@ -13,7 +14,7 @@ namespace WebAPI.Controllers
     [RoutePrefix("api/Order/{Source}")]
     public class OrderController : ApiController
     {
-        private IOrderDAL OrderDAL;
+        private IDataRepository DataRepository;
 
         public OrderController()
         {
@@ -32,7 +33,7 @@ namespace WebAPI.Controllers
                 }
                 int source = int.Parse(str);
                 var kernel = new StandardKernel(new SourceNinjectModule(source));
-                OrderDAL = kernel.Get<IOrderDAL>();
+                DataRepository = kernel.Get<IDataRepository>();
             }
             catch(Exception e)
             {
@@ -43,42 +44,42 @@ namespace WebAPI.Controllers
 
         [Route("")]
         [HttpGet]
-        public IEnumerable<Order> Get()
+        public IEnumerable<OrderDTO> Get()
         {
             
-            return OrderDAL.GetOrders();
+            return DataRepository.GetOrders();
         }
 
         // GET api/values/5
         [Route("{id}")]
         [HttpGet]
-        public Order Get(int id)
+        public OrderDTO Get(int id)
         {
-            return OrderDAL.GetOrderByID(id);
+            return DataRepository.GetOrderByID(id);
         }
 
         // POST api/values
         [Route("")]
         [HttpPost]
-        public void Post([FromBody]Order value, int Source)
+        public void Post([FromBody]OrderDTO value)
         {
-            OrderDAL.AddOrder(value);
+            DataRepository.AddOrder(value);
         }
 
         // PUT api/values/5
         [Route("{id}")]
         [HttpPut]
-        public void Put(int id, [FromBody]Order value, int Source)
+        public void Put(int id, [FromBody]OrderDTO value)
         {
-            OrderDAL.UpdateOrder(value, id);
+            DataRepository.UpdateOrder(value, id);
         }
 
         // DELETE api/values/5
         [Route("{id}")]
         [HttpDelete]
-        public void Delete(int id, int Source)
+        public void Delete(int id)
         {
-            OrderDAL.DeleteOrder(id);
+            DataRepository.DeleteOrder(id);
         }
     }
 }

@@ -58,10 +58,14 @@
   <ItemGroup>
     <Compile Include="DataAccess\CarOwnerDAL.cs" />
     <Compile Include="DataAccess\CarOwnerDAL_file.cs" />
+    <Compile Include="DTO\DataRepository.cs" />
     <Compile Include="DataAccess\ICarOwnerDAL.cs" />
+    <Compile Include="DTO\IDataRepository.cs" />
     <Compile Include="DataAccess\IOrderDAL.cs" />
     <Compile Include="DataAccess\OrderDAL.cs" />
     <Compile Include="DataAccess\OrderDAL_file.cs" />
+    <Compile Include="DTO\CarOwnerDTO.cs" />
+    <Compile Include="DTO\OrderDTO.cs" />
     <Compile Include="Model\Model.cs" />
     <Compile Include="Model\SampleContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -38,7 +38,7 @@ namespace CarService.DataAccess.Source
         }
         public void SetModel(AutoServiceModel autoServiceModel)
         {
-            FileStream fs = new FileStream(Path, FileMode.OpenOrCreate);
+            FileStream fs = new FileStream(Path, FileMode.Create);
             // Construct a BinaryFormatter and use it to serialize the data to the stream.
             BinaryFormatter formatter = new BinaryFormatter();
             formatter.Serialize(fs, autoServiceModel);

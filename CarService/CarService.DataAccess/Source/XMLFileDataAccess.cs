@@ -21,7 +21,7 @@ namespace CarService.DataAccess.Source
             try
             {
                 
-                using (Stream reader = new FileStream(Path, FileMode.Open))
+                using (Stream reader = new FileStream(Path, FileMode.OpenOrCreate))
                 {
                     // Call the Deserialize method to restore the object's state.
                     result = (AutoServiceModel)xmlSerializer.Deserialize(reader);
@@ -30,7 +30,8 @@ namespace CarService.DataAccess.Source
             }
             catch (Exception e)
             {
-                throw new Exception("Не удалось получить доступ к базе данных");
+                result = new AutoServiceModel(this);
+                SetModel(result);
             }
             return result;
         }
@@ -38,7 +39,7 @@ namespace CarService.DataAccess.Source
         public void SetModel(AutoServiceModel autoServiceModel)
         {
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(AutoServiceModel));
-            using (Stream writer = new FileStream(Path, FileMode.OpenOrCreate))
+            using (Stream writer = new FileStream(Path, FileMode.Create))
             {
                 // Call the Deserialize method to restore the object's state.
                 xmlSerializer.Serialize(writer, autoServiceModel);

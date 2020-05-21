@@ -1,4 +1,5 @@
-﻿using CarService.DataAccess.Model;
+﻿using CarService.DataAccess.DTO;
+using CarService.DataAccess.Model;
 using CarService.DesktopClient.Model;
 using System;
 using System.Linq;
@@ -7,10 +8,10 @@ namespace CarService.DesktopClient.ViewModel
 {
     public class CarOwnerViewModel:ViewModel
     {
-        private CarOwner carOwner;
+        private CarOwnerDTO carOwner;
                 
 
-        public CarOwnerViewModel(CarOwner carOwner)
+        public CarOwnerViewModel(CarOwnerDTO carOwner)
         {
             this.carOwner = carOwner;
             this.PropertyChanged += CarOwnerViewModel_PropertyChanged;
@@ -24,7 +25,7 @@ namespace CarService.DesktopClient.ViewModel
 
         public CarOwnerViewModel()
         {
-            carOwner = new CarOwner();
+            carOwner = new CarOwnerDTO();
             carOwner.Birthday = DateTime.Now;
             this.PropertyChanged += CarOwnerViewModel_PropertyChanged;
         }

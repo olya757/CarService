@@ -29,7 +29,7 @@ namespace CarService.DataAccess.Source
             Path = fileDataAccess.Path;
             CarOwners = new List<CarOwner>();
             Orders = new List<Order>();
-            //this.fileDataAccess = fileDataAccess;
+            this.fileDataAccess = fileDataAccess;
             //var data =fileDataAccess.GetModel();
             //this.CarOwners = data.CarOwners;
             //this.Orders = data.Orders;

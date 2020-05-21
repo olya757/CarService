@@ -44,7 +44,11 @@ namespace CarService.DesktopClient.ViewModel
             TypesOfTransmission.Add("Задний привод");
             TypesOfTransmission.Add("Полный привод");
             OpenOrderFormCommand = new OpenOrderFormCommand(this);
-            MouseDoubleClickCommand = new OpenOrderFormCommand(this);
+            MouseDoubleClickCommand = new RelayCommand<OrderViewModel>(
+                item =>
+                {
+                    item.OpenOrderForm();
+                });
         }
 
         public void Save()

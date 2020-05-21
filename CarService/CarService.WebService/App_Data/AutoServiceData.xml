@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <AutoServiceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <iCarOwners>0</iCarOwners>
-  <iOrders>1</iOrders>
+  <iOrders>0</iOrders>
   <Path>C:\Users\Olga Shishkina\Desktop\Практика DSR\CarService\CarService\CarService.WebService\App_Data\AutoServiceData.xml</Path>
   <CarOwners>
     <CarOwner>
@@ -254,19 +254,6 @@
     </CarOwner>
   </CarOwners>
   <Orders>
-    <Order>
-      <ID>1</ID>
-      <CarBrand>Mitsubishi</CarBrand>
-      <CarModel>Octavia</CarModel>
-      <YearOfManufacture>2018</YearOfManufacture>
-      <TypeOfTransmission>full</TypeOfTransmission>
-      <EnginePower>71</EnginePower>
-      <NameOfWorks>Замена свечей зажигания</NameOfWorks>
-      <DateOfStart>2019-11-11T00:00:00</DateOfStart>
-      <DateOfFinish>2019-11-14T20:00:00</DateOfFinish>
-      <Price>367000</Price>
-      <OwnerID>23</OwnerID>
-    </Order>
     <Order>
       <ID>2</ID>
       <CarBrand>Mitsubishi</CarBrand>
@@ -933,6 +920,18 @@
     <Order>
       <ID>1</ID>
       <CarBrand>Ауди</CarBrand>
+      <CarModel>Ку 7</CarModel>
+      <YearOfManufacture>2020</YearOfManufacture>
+      <TypeOfTransmission>front</TypeOfTransmission>
+      <EnginePower>200</EnginePower>
+      <NameOfWorks>Поменять лобовое стекло</NameOfWorks>
+      <DateOfStart>2020-05-21T01:55:31.9368115+03:00</DateOfStart>
+      <DateOfFinish>2020-05-24T01:55:31.936+03:00</DateOfFinish>
+      <Price>20000</Price>
+      <OwnerID>7</OwnerID>
+    </Order>
+  </Orders>
+</AutoServiceModel>и</CarBrand>
       <CarModel>Ку 7</CarModel>
       <YearOfManufacture>2020</YearOfManufacture>
       <TypeOfTransmission>front</TypeOfTransmission>

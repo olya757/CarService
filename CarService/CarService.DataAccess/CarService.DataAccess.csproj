@@ -72,9 +72,6 @@
     <Compile Include="Source\XMLFileDataAccess.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Data\AutoServiceData.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>

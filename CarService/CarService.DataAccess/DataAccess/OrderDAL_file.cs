@@ -15,7 +15,7 @@ namespace CarService.DataAccess.DataAccess
 
         public OrderDAL_file(IFileDataAccess fileDataAccess)
         {
-            autoServiceModel = new AutoServiceModel( fileDataAccess);
+            autoServiceModel = fileDataAccess.GetModel();
         }
         public void AddOrder(Order order)
         {

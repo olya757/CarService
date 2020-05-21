@@ -14,7 +14,7 @@ namespace CarService.DataAccess.DataAccess
                
         public CarOwnerDAL_file(IFileDataAccess fileDataAccess)
         {
-            autoServiceModel = new AutoServiceModel(fileDataAccess);
+            autoServiceModel = fileDataAccess.GetModel();
         }
         public void AddCarOwner(CarOwner CarOwner)
         {

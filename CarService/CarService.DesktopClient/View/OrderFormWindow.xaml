@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CarService.DesktopClient.View"
         xmlns:wpftc1="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="OrderFormWindow" WindowStartupLocation="CenterScreen" Height="600" Width="900">
+        Title="OrderFormWindow" x:Name="window" WindowStartupLocation="CenterScreen" Height="600" Width="900">
     <Grid>
 
           <Grid Background="White" Margin="15" >
@@ -123,7 +123,7 @@
                 <TextBlock Text="Информация о владельце авто" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
                 </TextBlock>
 
-                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding IndexCarOwnerViewModel.CarOwners}" SelectedItem="{Binding IndexCarOwnerViewModel.CurrentOwner}" Grid.RowSpan="7" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding IndexCarOwnerViewModel.CarOwners}" SelectedItem="{Binding IndexCarOwnerViewModel.CurrentOwner}" Grid.RowSpan="7" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}"/>
                         <DataGridTextColumn Header="Имя" Binding="{Binding Name}"/>
@@ -153,7 +153,7 @@
 
             <StackPanel Grid.Row="1" Grid.Column="4" Height="Auto" Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button IsCancel="True" Grid.Column="4" Grid.Row="10" Content="Отмена" Width="Auto" VerticalAlignment="Center" Height="Auto" Padding="10 5" Margin="0 0 10 0"></Button>
-                        <Button IsCancel="True" Grid.Column="4" Grid.Row="10" Content="Сохранить" Width="Auto" VerticalAlignment="Center" Height="Auto" Padding="10 5"  Command="{Binding SaveNewOrderCommand}"></Button>
+                <Button IsDefault="False" IsCancel="True" Grid.Column="4" Grid.Row="10" Content="Сохранить" Width="Auto" VerticalAlignment="Center" Height="Auto" Padding="10 5"  Command="{Binding SaveNewOrderCommand}" CommandParameter="{Binding ElementName=window}"></Button>
                     </StackPanel>
                 </Grid>
     </Grid>

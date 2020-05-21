@@ -20,7 +20,7 @@ namespace CarService.DesktopClient.Commands
 
         public void Execute(object parameter)
         {
-            OrderFormViewModel.Save();
+            OrderFormViewModel.Save(null);
         }
     }
 }

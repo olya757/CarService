@@ -51,7 +51,11 @@ namespace CarService.DesktopClient.ViewModel
             AddNewOrderCommand = new AddNewOrderCommand(this);
             DeleteOrderCommand = new DeleteOrderCommand(this);
 
-            MouseDoubleClickCommand = new DelegateCommand<OrderViewModel>(item=> item.OpenOrderForm());
+            MouseDoubleClickCommand =  new RelayCommand<object>(
+                item =>
+                {
+                    CurrentOrder.OpenOrderForm();
+                });
         }
 
         public void Update()

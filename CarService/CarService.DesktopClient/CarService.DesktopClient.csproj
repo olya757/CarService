@@ -178,6 +178,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\AddCarOwnerCommand.cs" />
     <Compile Include="Commands\AddNewOrderCommand.cs" />
+    <Compile Include="Commands\Commands.cs" />
     <Compile Include="Commands\DeleteOrderCommand.cs" />
     <Compile Include="Commands\LoadSelectedSourceCommand.cs" />
     <Compile Include="Commands\OpenOrderFormCommand.cs" />

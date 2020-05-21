@@ -1,6 +1,9 @@
 ﻿using CarService.DesktopClient.Commands;
 using CarService.DesktopClient.Model;
+using GalaSoft.MvvmLight.CommandWpf;
 using System.Linq;
+using System.Windows;
+using System.Windows.Input;
 
 namespace CarService.DesktopClient.ViewModel
 {
@@ -21,17 +24,20 @@ namespace CarService.DesktopClient.ViewModel
             {
                 IndexCarOwnerViewModel.CurrentOwner = new CarOwnerViewModel();
             }
-            SaveNewOrderCommand = new SaveNewOrderCommand(this);
+            SaveNewOrderCommand = new RelayCommand<Window>(this.Save);
         }
 
-        public SaveNewOrderCommand SaveNewOrderCommand { get; set; }
+        public ICommand SaveNewOrderCommand { get; set; }
 
-        public void Save()
+        public void Save(Window window)
         {
             IndexCarOwnerViewModel.Save();
             //IndexCarOwnerViewModel.CurrentOwner.Save();
             OrderViewModel.OwnerID = IndexCarOwnerViewModel.CurrentOwner.ID;
             OrderViewModel.Save();
+            window.Close();
         }
+
+        
     }
 }

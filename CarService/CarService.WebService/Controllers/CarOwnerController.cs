@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
             }
             catch(Exception e)
             {
-
+                var a = 3;
             }
         }
 

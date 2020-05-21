@@ -27,8 +27,7 @@ namespace CarService.DataAccess.Source
             catch (Exception e)
             {
                 fs.Close();
-                result = new AutoServiceModel();
-                result.fileDataAccess = this;
+                result = new AutoServiceModel(this);
                 SetModel(result);
             }
             finally

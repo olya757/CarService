@@ -1,0 +1,55 @@
+﻿<Window x:Class="CarService.DesktopClient.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ViewModel="clr-namespace:CarService.DesktopClient.ViewModel"
+        xmlns:local="clr-namespace:CarService.DesktopClient.View"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm/internal"
+        xmlns:cmd="http://www.galasoft.ch/mvvmlight"
+        xmlns:dxmvvm1="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+        mc:Ignorable="d"
+        Title="MainWindow" WindowState="Maximized" Width="{DynamicResource {x:Static SystemParameters.MaximizedPrimaryScreenWidthKey}}" Height="500">
+    <Window.DataContext>
+        <ViewModel:SourceManagerViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
+            <ComboBox Margin="5" ItemsSource="{Binding Sources}" SelectedItem="{Binding CurrentSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+            <Button Margin="5" Width="Auto" Height="Auto" HorizontalAlignment="Right" Content="Загрузить данные" Command="{Binding LoadSelectedSourceCommand}"></Button>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Margin="5" Content="Добавить запись" Command="{Binding IndexOrderViewModel.AddNewOrderCommand}"></Button>
+            <Button Margin="5" Content="Удалить запись" Command="{Binding IndexOrderViewModel.DeleteOrderCommand}"></Button>
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <DataGrid IsSynchronizedWithCurrentItem="True" SelectionMode="Single"
+          SelectionUnit="FullRow"  x:Name="dgOrders" IsReadOnly="True" CanUserAddRows="False"  ScrollViewer.HorizontalScrollBarVisibility="Auto" AutoGenerateColumns="False" Grid.Row="1" ItemsSource="{Binding IndexOrderViewModel.Orders}" SelectedItem="{Binding IndexOrderViewModel.CurrentOrder}" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseDoubleClick">
+                        <i:InvokeCommandAction Command="{Binding MouseDoubleClickCommand, IsAsync=True}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ID, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Марка авто" Binding="{Binding CarBrand}"/>
+                <DataGridTextColumn Header="Модель авто" Binding="{Binding CarModel}"/>
+                <DataGridTextColumn Header="Год выпуска" Binding="{Binding YearOfManufacture}"/>
+                    <DataGridTextColumn Header="Тип трансмиссии" Binding="{Binding TypeOfTransmission, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Мощность двигателя (л.с.)" Binding="{Binding EnginePower}"/>
+                <DataGridTextColumn Header="Наименование работ" Binding="{Binding NameOfWorks}"/>
+                <DataGridTextColumn Header="Время начала работ" Binding="{Binding DateOfStart}">
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Время окончания работ" Binding="{Binding DateOfFinish}">
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Стоимость работ (руб.)" Binding="{Binding Price}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        </Grid>
+    </Grid>
+</Window>

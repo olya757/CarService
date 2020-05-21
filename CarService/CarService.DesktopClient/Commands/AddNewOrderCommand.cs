@@ -22,7 +22,7 @@ namespace CarService.DesktopClient.Commands
         public void Execute(object parameter)
         {
             IndexOrderViewModel.AddNewOrder();
-            IndexOrderViewModel.OpenOrderForm(3);
+            IndexOrderViewModel.OpenOrderForm();
         }
     }
 }

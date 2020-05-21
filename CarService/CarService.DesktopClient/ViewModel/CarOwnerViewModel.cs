@@ -1,5 +1,4 @@
 ﻿using CarService.DataAccess.DTO;
-using CarService.DataAccess.Model;
 using CarService.DesktopClient.Model;
 using System;
 using System.Linq;
@@ -14,19 +13,21 @@ namespace CarService.DesktopClient.ViewModel
         public CarOwnerViewModel(CarOwnerDTO carOwner)
         {
             this.carOwner = carOwner;
+            NeedToSave = false;
             this.PropertyChanged += CarOwnerViewModel_PropertyChanged;
         }
 
-        bool changed = false;
+        public bool NeedToSave { get; set; }
         private void CarOwnerViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            changed = true;
+            NeedToSave = true;
         }
 
         public CarOwnerViewModel()
         {
             carOwner = new CarOwnerDTO();
             carOwner.Birthday = DateTime.Now;
+            NeedToSave = true;
             this.PropertyChanged += CarOwnerViewModel_PropertyChanged;
         }
 
@@ -38,7 +39,7 @@ namespace CarService.DesktopClient.ViewModel
 
         public void Save()
         {
-            if (changed)
+            if (NeedToSave)
             {
                 int id = carOwner.ID;
                 AutoServiceModel_HttpRequests.AddCarOwner(carOwner);
@@ -49,7 +50,7 @@ namespace CarService.DesktopClient.ViewModel
                     carOwner = cos.First(p => p.ID == max);
                     OnPropertyChanged(nameof(ID));
                 }
-                changed = false;
+                NeedToSave = false;
             }
         }
 

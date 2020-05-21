@@ -1,6 +1,4 @@
-﻿using CarService.DataAccess.DataAccess;
-using CarService.DataAccess.DTO;
-using CarService.DataAccess.Model;
+﻿using CarService.DataAccess.DTO;
 using CarService.WebService.App_Start;
 using Ninject;
 using System;

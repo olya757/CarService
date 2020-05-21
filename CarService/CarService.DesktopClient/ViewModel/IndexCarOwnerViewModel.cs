@@ -1,6 +1,4 @@
 ﻿using CarService.DesktopClient.Commands;
-using CarService.DataAccess.Model;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using CarService.DesktopClient.Model;
 

@@ -3,14 +3,10 @@ using CarService.DataAccess.Model;
 using CarService.DesktopClient.Commands;
 using CarService.DesktopClient.Model;
 using CarService.DesktopClient.View;
-using DevExpress.Mvvm;
 using GalaSoft.MvvmLight.Command;
-using Microsoft.Expression.Interactivity.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace CarService.DesktopClient.ViewModel
@@ -21,16 +17,20 @@ namespace CarService.DesktopClient.ViewModel
 
         public OrderViewModel()
         {
-            this.order = new OrderDTO();
-            this.order.YearOfManufacture = 1990;
-            this.order.DateOfStart = DateTime.Now;
-            this.order.DateOfFinish = DateTime.Now;
+            this.order = new OrderDTO
+            {
+                YearOfManufacture = 1990,
+                DateOfStart = DateTime.Now,
+                DateOfFinish = DateTime.Now
+            };
+            NeedToSave = true;
             Init();
         }
 
         public OrderViewModel(OrderDTO order)
         {
             this.order = order;
+            NeedToSave = false;
             Init();
         }
 
@@ -50,26 +50,40 @@ namespace CarService.DesktopClient.ViewModel
                 {
                     item.OpenOrderForm();
                 });
+            
+
+            this.PropertyChanged += OrderViewModel_PropertyChanged;
+        }
+
+        public bool NeedToSave { get; set; }
+
+        private void OrderViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            NeedToSave = true;
         }
 
         public void Save()
         {
-            var id = order.ID;
-            AutoServiceModel_HttpRequests.AddOrder(order);
-            //чтобы получить правильный ID
-            if (id == 0)
+            if (NeedToSave)
             {
-                var cos = AutoServiceModel_HttpRequests.GetOrders();
-                var max = cos.Max(p => p.ID);
-                order = cos.First(p => p.ID == max);
-                OnPropertyChanged(nameof(ID));
+                var id = order.ID;
+                AutoServiceModel_HttpRequests.AddOrder(order);
+                //чтобы получить правильный ID
+                if (id == 0)
+                {
+                    var cos = AutoServiceModel_HttpRequests.GetOrders();
+                    var max = cos.Max(p => p.ID);
+                    order = cos.First(p => p.ID == max);
+                    OnPropertyChanged(nameof(ID));
+                }
+                NeedToSave = false;
             }
-
         }
 
         public void Delete()
         {
             AutoServiceModel_HttpRequests.DeleteOrder(order.ID);
+            NeedToSave = false;
         }
 
         public int ID
@@ -163,7 +177,7 @@ namespace CarService.DesktopClient.ViewModel
             }
             set
             {
-                if (value > 1900)
+                if (value<=DateTime.Now.Year && value > 1900)
                 {
                     order.YearOfManufacture = value;
                 }
@@ -193,8 +207,11 @@ namespace CarService.DesktopClient.ViewModel
             }
             set
             {
-                order.EnginePower = value;
-                OnPropertyChanged(nameof(EnginePower));
+                if (value >= 0)
+                {
+                    order.EnginePower = value;
+                    OnPropertyChanged(nameof(EnginePower));
+                }
             }
         }
         public string NameOfWorks
@@ -217,8 +234,11 @@ namespace CarService.DesktopClient.ViewModel
             }
             set
             {
-                order.Price = value;
-                OnPropertyChanged(nameof(Price));
+                if (value >= 0)
+                {
+                    order.Price = value;
+                    OnPropertyChanged(nameof(Price));
+                }
             }
         }
 
@@ -233,22 +253,10 @@ namespace CarService.DesktopClient.ViewModel
         {
             OrderFormWindow orderFormWindow = new OrderFormWindow();
             orderFormWindow.DataContext = OrderFormViewModel;
-            if (orderFormWindow.ShowDialog() is true)
-            {
-
-            }
-            else
-            {
-                if (this.ID == 0)
-                {
-                    
-                }
-            }
+            orderFormWindow.ShowDialog();
         }
 
-        public ICommand MouseDoubleClickCommand
-        {get;set;
-        }
+        public ICommand MouseDoubleClickCommand{ get;set;}
 
     }
 }

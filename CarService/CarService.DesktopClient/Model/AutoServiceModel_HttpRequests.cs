@@ -1,12 +1,10 @@
 ﻿using CarService.DataAccess.DTO;
-using CarService.DataAccess.Model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
+using static CarService.DesktopClient.ViewModel.SourceManagerViewModel;
 
 namespace CarService.DesktopClient.Model
 {
@@ -23,9 +21,9 @@ namespace CarService.DesktopClient.Model
             httpClient.BaseAddress = new Uri("https://localhost:44341/api/");
         }
 
-        public static void UpdateSource(int source)
+        public static void UpdateSource(DataSourceType source)
         {
-            Source = source;
+            Source = ((int)source)+1;
         }
 
         public static void AddCarOwner(CarOwnerDTO carOwner)

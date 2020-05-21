@@ -18,28 +18,7 @@ namespace CarService.DesktopClient.View
         public MainWindow()
         {
             InitializeComponent();
-            //CreateData();
         }
-
-        private static void CreateData()
-        {
-            //AutoServiceModelFromDB autoServiceModel_db = new AutoServiceModelFromDB();
-            //AutoServiceModel_HttpRequests.UpdateSource(2);
-            //GenerateDataForModel(903);
-
-            //var fileDataAccess_dat = FileDataAccessCreator.GetFileDataAccess(@"../../Data/AutoServiceData.dat");
-            //AutoServiceModel autoServiceModel_dat = fileDataAccess_dat.GetModel();
-            //GenerateDataForModel(autoServiceModel_dat,905);
-
-            //var fileDataAccess_xml = FileDataAccessCreator.GetFileDataAccess(@"../../Data/AutoServiceData.xml");
-            //AutoServiceModel autoServiceModel_xml = fileDataAccess_xml.GetModel();
-            //GenerateDataForModel(autoServiceModel_xml,920);
-        }
-
-
-
-
-
 
         //private static void GenerateDataForModel(int codePhone)
         //{

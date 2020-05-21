@@ -11,7 +11,12 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:clr="clr-namespace:CarService.DesktopClient.Commands"
         mc:Ignorable="d"
-        Title="MainWindow" WindowState="Maximized" Width="{DynamicResource {x:Static SystemParameters.MaximizedPrimaryScreenWidthKey}}" Height="500">
+        Title="MainWindow"  WindowState="Maximized" Width="{DynamicResource {x:Static SystemParameters.MaximizedPrimaryScreenWidthKey}}" Height="500">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction  Command="{Binding WindowClosingCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Window.DataContext>
         <ViewModel:SourceManagerViewModel/>
     </Window.DataContext>
@@ -30,21 +35,21 @@
         </StackPanel>
         <Grid Grid.Row="1">
             <DataGrid IsSynchronizedWithCurrentItem="True" SelectionMode="Single"
-          SelectionUnit="FullRow"  x:Name="dgOrders" IsReadOnly="True" CanUserAddRows="False"  ScrollViewer.HorizontalScrollBarVisibility="Auto" AutoGenerateColumns="False" Grid.Row="1" ItemsSource="{Binding IndexOrderViewModel.Orders}" SelectedItem="{Binding IndexOrderViewModel.CurrentOrder}" clr:Commands.DataGridDoubleClickCommand="{Binding IndexOrderViewModel.MouseDoubleClickCommand}" >
+          SelectionUnit="FullRow"  x:Name="dgOrders" CanUserAddRows="False"  ScrollViewer.HorizontalScrollBarVisibility="Auto" AutoGenerateColumns="False" Grid.Row="1" ItemsSource="{Binding IndexOrderViewModel.Orders}" SelectedItem="{Binding IndexOrderViewModel.CurrentOrder}" clr:Commands.DataGridDoubleClickCommand="{Binding IndexOrderViewModel.MouseDoubleClickCommand}" >
                 
                 <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding ID, Mode=OneWay}"/>
-                <DataGridTextColumn Header="Марка авто" Binding="{Binding CarBrand}"/>
-                <DataGridTextColumn Header="Модель авто" Binding="{Binding CarModel}"/>
-                <DataGridTextColumn Header="Год выпуска" Binding="{Binding YearOfManufacture}"/>
+                <DataGridTextColumn Header="Марка авто" Binding="{Binding CarBrand, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn Header="Модель авто" Binding="{Binding CarModel, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn Header="Год выпуска" Binding="{Binding YearOfManufacture, UpdateSourceTrigger=LostFocus}"/>
                     <DataGridTextColumn Header="Тип трансмиссии" Binding="{Binding TypeOfTransmission, Mode=OneWay}"/>
-                <DataGridTextColumn Header="Мощность двигателя (л.с.)" Binding="{Binding EnginePower}"/>
-                <DataGridTextColumn Header="Наименование работ" Binding="{Binding NameOfWorks}"/>
-                <DataGridTextColumn Header="Время начала работ" Binding="{Binding DateOfStart}">
+                <DataGridTextColumn Header="Мощность двигателя (л.с.)" Binding="{Binding EnginePower, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn Header="Наименование работ" Binding="{Binding NameOfWorks, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn Header="Время начала работ" Binding="{Binding DateOfStart, Mode=OneWay}">
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Время окончания работ" Binding="{Binding DateOfFinish}">
+                <DataGridTextColumn Header="Время окончания работ" Binding="{Binding DateOfFinish, Mode=OneWay}">
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Стоимость работ (руб.)" Binding="{Binding Price}"/>
+                <DataGridTextColumn Header="Стоимость работ (руб.)" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}"/>
             </DataGrid.Columns>
                 <DataGrid.InputBindings>
                     <MouseBinding MouseAction="LeftDoubleClick"

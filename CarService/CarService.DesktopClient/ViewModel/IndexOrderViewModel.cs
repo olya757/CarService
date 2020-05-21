@@ -1,13 +1,11 @@
 ﻿using CarService.DesktopClient.Commands;
 using CarService.DesktopClient.Model;
 using CarService.DesktopClient.View;
-using DevExpress.Mvvm;
 using GalaSoft.MvvmLight.CommandWpf;
-using Microsoft.Expression.Interactivity.Core;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
-using System.Windows.Interactivity;
 
 namespace CarService.DesktopClient.ViewModel
 {
@@ -43,7 +41,6 @@ namespace CarService.DesktopClient.ViewModel
             foreach(var o in AutoServiceModel_HttpRequests.GetOrders())
             {
                 var order = new OrderViewModel(o);
-                order.PropertyChanged += Order_PropertyChanged;
                 Orders.Add(order);
             }
             if(Orders.Count()>0)
@@ -59,13 +56,11 @@ namespace CarService.DesktopClient.ViewModel
         }
 
         public void Update()
-        {
-            
+        {             
             Orders = new ObservableCollection<OrderViewModel>();
             foreach (var o in AutoServiceModel_HttpRequests.GetOrders())
             {
-                var order = new OrderViewModel(o);
-                order.PropertyChanged += Order_PropertyChanged;
+                var order = new OrderViewModel(o); 
                 Orders.Add(order);
             }
             if (Orders.Count() > 0)
@@ -75,14 +70,17 @@ namespace CarService.DesktopClient.ViewModel
 
         }
 
+        public bool NeedToSave { get
+            {
+                return Orders.Any(o => o.NeedToSave);
+            }
+        }
+
         public AddNewOrderCommand AddNewOrderCommand { get; set; }
 
         public DeleteOrderCommand DeleteOrderCommand { get; set; }
 
-        private void Order_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            OnPropertyChanged("Orders");
-        }
+     
 
         public void AddNewOrder()
         {
@@ -111,7 +109,7 @@ namespace CarService.DesktopClient.ViewModel
             }
         }
 
-        public void OpenOrderForm(object row)
+        public void OpenOrderForm()
         {
             OrderFormWindow orderFormWindow = new OrderFormWindow();
             orderFormWindow.DataContext = OrderFormViewModel;
@@ -120,6 +118,14 @@ namespace CarService.DesktopClient.ViewModel
                 if (CurrentOrder.ID == 0)
                 {
                     Orders.Remove(CurrentOrder);
+                    if (Orders.Count() > 0)
+                    {
+                        CurrentOrder = Orders.First();
+                    }
+                    else
+                    {
+                        CurrentOrder = null;
+                    }
                 }               
             }
         }

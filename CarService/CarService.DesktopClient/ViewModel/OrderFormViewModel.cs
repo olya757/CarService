@@ -1,6 +1,4 @@
-﻿using CarService.DesktopClient.Commands;
-using CarService.DesktopClient.Model;
-using GalaSoft.MvvmLight.CommandWpf;
+﻿using GalaSoft.MvvmLight.CommandWpf;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;

@@ -1,4 +1,5 @@
 using CarService.WebService.App_Start;
+using CarService.WebService.Mapper;
 using System.Web.Http;
 using System.Web.Mvc;
 
@@ -19,7 +20,7 @@ namespace CarService.WebService
                         .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             config.Formatters.Remove(config.Formatters.XmlFormatter);
             //config.Formatters.XmlFormatter.MaxDepth = 2;
-
+            
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             //RouteConfig.RegisterRoutes(RouteTable.Routes);
             //BundleConfig.RegisterBundles(BundleTable.Bundles);

@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace CarService.DataAccess.DataAccess
 {
-    public class OrderDAL : IOrderDAL
+    public class OrderDAL : IDataRepository<Order>
     {
-        public void AddOrder(Order order)
+        public void Add(Order order)
         {
             using(var db = new SampleContext())
             {
@@ -19,13 +19,13 @@ namespace CarService.DataAccess.DataAccess
             }
         }
 
-        public void UpdateOrder(Order order, int id)
+        public void Update(Order order, int id)
         {
             order.ID = id;
-            AddOrder(order);
+            Add(order);
         }
 
-        public void DeleteOrder(int id)
+        public void Delete(int id)
         {
             using (var db = new SampleContext())
             {
@@ -40,7 +40,7 @@ namespace CarService.DataAccess.DataAccess
             }
         }
 
-        public List<Order> GetOrders()
+        public List<Order> GetIndex()
         {
             using (var db = new SampleContext())
             {
@@ -48,7 +48,7 @@ namespace CarService.DataAccess.DataAccess
             }
         }
 
-        public Order GetOrderByID(int id)
+        public Order GetByID(int id)
         {
             using (var db = new SampleContext())
             {

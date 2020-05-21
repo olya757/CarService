@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CarService.DataAccess.DataAccess
 {
-    public class OrderDAL_file : IOrderDAL
+    public class OrderDAL_file : IDataRepository<Order>
     {
         private AutoServiceModel autoServiceModel;
         
@@ -17,27 +17,27 @@ namespace CarService.DataAccess.DataAccess
         {
             autoServiceModel = fileDataAccess.GetModel();
         }
-        public void AddOrder(Order order)
+        public void Add(Order order)
         {
             autoServiceModel.AddOrder(order);
         }
 
-        public void DeleteOrder(int id)
+        public void Delete(int id)
         {
             autoServiceModel.DeleteOrder(id);
         }
 
-        public Order GetOrderByID(int id)
+        public Order GetByID(int id)
         {
             return autoServiceModel.GetOrderByID(id);
         }
 
-        public List<Order> GetOrders()
+        public List<Order> GetIndex()
         {
             return autoServiceModel.GetOrders();
         }
 
-        public void UpdateOrder(Order order, int id)
+        public void Update(Order order, int id)
         {
             autoServiceModel.UpdateOrder(order, id);
         }

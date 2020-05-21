@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace CarService.DataAccess.DataAccess
 {
-    public class CarOwnerDAL:ICarOwnerDAL
+    public class CarOwnerDAL:IDataRepository<CarOwner>
     {
-        public void AddCarOwner(CarOwner carOwner)
+        public void Add(CarOwner carOwner)
         {
             using(var db = new SampleContext())
             {
@@ -21,13 +21,13 @@ namespace CarService.DataAccess.DataAccess
             }
         }
 
-        public void UpdateCarOwner(CarOwner carOwner, int id)
+        public void Update(CarOwner carOwner, int id)
         {
             carOwner.ID = id;
-            AddCarOwner(carOwner);
+            Add(carOwner);
         }
 
-        public void DeleteCarOwner(int id)
+        public void Delete(int id)
         {
             using (var db = new SampleContext())
             {
@@ -42,7 +42,7 @@ namespace CarService.DataAccess.DataAccess
             }
         }
 
-        public List<CarOwner> GetCarOwners()
+        public List<CarOwner> GetIndex()
         {
             using (var db = new SampleContext())
             {
@@ -51,7 +51,7 @@ namespace CarService.DataAccess.DataAccess
             }
         }
 
-        public CarOwner GetCarOwnerByID(int id)
+        public CarOwner GetByID(int id)
         {            
             using (var db = new SampleContext())
             {

@@ -1,12 +1,4 @@
-﻿using CarService.DesktopClient.ViewModel;
-using CarService.DataAccess.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
-using System.Windows.Input;
-using CarService.DesktopClient.Model;
-using CarService.DataAccess.DTO;
+﻿using System.Windows;
 
 namespace CarService.DesktopClient.View
 {

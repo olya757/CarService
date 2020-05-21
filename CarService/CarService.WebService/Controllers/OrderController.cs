@@ -1,5 +1,9 @@
-﻿using CarService.DataAccess.DTO;
+﻿using AutoMapper;
+using CarService.DataAccess.DataAccess;
+using CarService.DataAccess.DTO;
+using CarService.DataAccess.Model;
 using CarService.WebService.App_Start;
+using CarService.WebService.Mapper;
 using Ninject;
 using System;
 using System.Collections.Generic;
@@ -12,10 +16,11 @@ namespace CarService.WebService.Controllers
     [RoutePrefix("api/Order/{Source}")]
     public class OrderController : ApiController
     {
-        private IDataRepository DataRepository;
-
+        private IDataRepository<Order> DataRepository;
+        private IMapper mapper;
         public OrderController()
         {
+            mapper = AutoMapperProfile.InitializeAutoMapper().CreateMapper();
         }
 
 
@@ -31,7 +36,7 @@ namespace CarService.WebService.Controllers
                 }
                 int source = int.Parse(str);
                 var kernel = new StandardKernel(new SourceNinjectModule(source));
-                DataRepository = kernel.Get<IDataRepository>();
+                DataRepository = kernel.Get<IDataRepository<Order>>();
             }
             catch(Exception e)
             {
@@ -43,9 +48,8 @@ namespace CarService.WebService.Controllers
         [Route("")]
         [HttpGet]
         public IEnumerable<OrderDTO> Get()
-        {
-            
-            return DataRepository.GetOrders();
+        {            
+            return mapper.Map<IEnumerable<OrderDTO>>( DataRepository.GetIndex());
         }
 
         // GET api/values/5
@@ -53,7 +57,7 @@ namespace CarService.WebService.Controllers
         [HttpGet]
         public OrderDTO Get(int id)
         {
-            return DataRepository.GetOrderByID(id);
+            return mapper.Map<OrderDTO>(DataRepository.GetByID(id));
         }
 
         // POST api/values
@@ -61,7 +65,7 @@ namespace CarService.WebService.Controllers
         [HttpPost]
         public void Post([FromBody]OrderDTO value)
         {
-            DataRepository.AddOrder(value);
+            DataRepository.Add(mapper.Map<Order>( value));
         }
 
         // PUT api/values/5
@@ -69,7 +73,7 @@ namespace CarService.WebService.Controllers
         [HttpPut]
         public void Put(int id, [FromBody]OrderDTO value)
         {
-            DataRepository.UpdateOrder(value, id);
+            DataRepository.Update(mapper.Map<Order>(value), id);
         }
 
         // DELETE api/values/5
@@ -77,7 +81,7 @@ namespace CarService.WebService.Controllers
         [HttpDelete]
         public void Delete(int id)
         {
-            DataRepository.DeleteOrder(id);
+            DataRepository.Delete(id);
         }
     }
 }

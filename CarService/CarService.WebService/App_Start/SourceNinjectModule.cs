@@ -1,8 +1,7 @@
 ﻿using CarService.DataAccess.DataAccess;
-using CarService.DataAccess.DTO;
+using CarService.DataAccess.Model;
 using CarService.DataAccess.Source;
 using Ninject.Modules;
-
 
 namespace CarService.WebService.App_Start
 {
@@ -16,27 +15,26 @@ namespace CarService.WebService.App_Start
 
         public override void Load()
         {
-            Bind<IDataRepository>().To<DataRepository>();
             switch (Source)
             {
                 case 1:
                     {
-                        Bind<ICarOwnerDAL>().To<CarOwnerDAL>();
-                        Bind<IOrderDAL>().To<OrderDAL>();
+                        Bind<IDataRepository<CarOwner>>().To<CarOwnerDAL>();
+                        Bind<IDataRepository<Order>>().To<OrderDAL>();
                         break;
                     }
                 case 2:
                     {
                         Bind<IFileDataAccess>().To<XMLFileDataAccess>();
-                        Bind<ICarOwnerDAL>().To<CarOwnerDAL_file>();
-                        Bind<IOrderDAL>().To<OrderDAL_file>();
+                        Bind<IDataRepository<CarOwner>>().To<CarOwnerDAL_file>();
+                        Bind<IDataRepository<Order>>().To<OrderDAL_file>();
                         break;
                     }
                 case 3:
                     {
                         Bind<IFileDataAccess>().To<BinaryFileDataAccess>();
-                        Bind<ICarOwnerDAL>().To<CarOwnerDAL_file>();
-                        Bind<IOrderDAL>().To<OrderDAL_file>();
+                        Bind<IDataRepository<CarOwner>>().To<CarOwnerDAL_file>();
+                        Bind<IDataRepository<Order>>().To<OrderDAL_file>();
                         break;
                     }
             }

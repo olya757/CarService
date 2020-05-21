@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CarService.DataAccess.DataAccess
 {
-    public class CarOwnerDAL_file :ICarOwnerDAL
+    public class CarOwnerDAL_file :IDataRepository<CarOwner>
     {
         private AutoServiceModel autoServiceModel;
                
@@ -16,27 +16,27 @@ namespace CarService.DataAccess.DataAccess
         {
             autoServiceModel = fileDataAccess.GetModel();
         }
-        public void AddCarOwner(CarOwner CarOwner)
+        public void Add(CarOwner CarOwner)
         {
             autoServiceModel.AddCarOwner(CarOwner);
         }
 
-        public void DeleteCarOwner(int id)
+        public void Delete(int id)
         {
             autoServiceModel.DeleteCarOwner(id);
         }
 
-        public CarOwner GetCarOwnerByID(int id)
+        public CarOwner GetByID(int id)
         {
             return autoServiceModel.GetCarOwnerByID(id);
         }
 
-        public List<CarOwner> GetCarOwners()
+        public List<CarOwner> GetIndex()
         {
             return autoServiceModel.GetCarOwners();
         }
 
-        public void UpdateCarOwner(CarOwner CarOwner, int id)
+        public void Update(CarOwner CarOwner, int id)
         {
             autoServiceModel.UpdateCarOwner(CarOwner, id);
         }

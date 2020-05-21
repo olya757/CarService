@@ -21,50 +21,6 @@ namespace CarService.DataAccess.DTO
         public int Price { get; set; }
         public int OwnerID { get; set; }
 
-        public OrderDTO(Order order)
-        {
-            ID = order.ID;
-            CarBrand = order.CarBrand;
-            CarModel = order.CarModel;
-            YearOfManufacture = order.YearOfManufacture;
-            TypeOfTransmission = order.TypeOfTransmission;
-            EnginePower = order.EnginePower;
-            NameOfWorks = order.NameOfWorks;
-            DateOfStart = order.DateOfStart;
-            DateOfFinish = order.DateOfFinish;
-            Price = order.Price;
-            OwnerID = order.OwnerID;
-        }
-
-        public OrderDTO()
-        {
-            ID = 0;
-            CarBrand = "";
-            CarModel = "";
-            YearOfManufacture = 1900;
-            TypeOfTransmission = TypeOfTransmission.front;
-            EnginePower = 0;
-            NameOfWorks = "";
-            DateOfStart = DateTime.Now;
-            DateOfFinish = DateTime.Now;
-            Price = 0;
-            OwnerID = 0;
-        }
-
-        public Order UpdateOrder(Order order)
-        {
-            order.CarBrand = CarBrand;
-            order.CarModel = CarModel;
-            order.DateOfFinish = DateOfFinish;
-            order.DateOfStart = DateOfStart;
-            order.EnginePower = EnginePower;
-            order.NameOfWorks = NameOfWorks;
-            order.OwnerID = OwnerID;
-            order.Price = Price;
-            order.TypeOfTransmission = TypeOfTransmission;
-            order.YearOfManufacture = YearOfManufacture;
-
-            return order;
-        }
+       
     }
 }

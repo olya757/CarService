@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace WebAPI
+namespace CarService.WebService.App_Start
 {
     public class FilterConfig
     {

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 
-namespace WebAPI.Controllers
+namespace CarService.WebService.Controllers
 {
     [RoutePrefix("api/CarOwner/{Source}")]
     public class CarOwnerController : ApiController

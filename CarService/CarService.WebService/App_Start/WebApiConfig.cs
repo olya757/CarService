@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 
-namespace WebAPI
+namespace CarService.WebService.App_Start
 {
     public static class WebApiConfig
     {

@@ -1,7 +1,8 @@
+using CarService.WebService.App_Start;
 using System.Web.Http;
 using System.Web.Mvc;
 
-namespace WebAPI
+namespace CarService.WebService
 {
     public class WebApiApplication : System.Web.HttpApplication
     {

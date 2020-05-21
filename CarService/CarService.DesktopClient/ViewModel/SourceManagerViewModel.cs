@@ -49,11 +49,20 @@ namespace CarService.DesktopClient.ViewModel
             SourcesDict[Sources[1]] = DataSourceType.xml;
             SourcesDict[Sources[2]] = DataSourceType.dat;
             CurrentSource = Sources[0];
-            AutoServiceModel_HttpRequests.UpdateSource(SourcesDict[CurrentSource]);
 
-            IndexOrderViewModel = new IndexOrderViewModel();
+            AutoServiceModel_HttpRequests.UpdateSource(SourcesDict[CurrentSource]);
+            try
+            {
+                IndexOrderViewModel = new IndexOrderViewModel();
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+                
+            }
             LoadSelectedSourceCommand = new LoadSelectedSourceCommand(this);
             WindowClosingCommand = new RelayCommand(this.SaveChanges);
+
         }
 
         public LoadSelectedSourceCommand LoadSelectedSourceCommand { get; set; }
@@ -70,9 +79,14 @@ namespace CarService.DesktopClient.ViewModel
         {            
             try
             {
-                AutoServiceModel_HttpRequests.UpdateSource(SourcesDict[CurrentSource]);
                 SaveChanges();
-                IndexOrderViewModel.Update();
+                AutoServiceModel_HttpRequests.UpdateSource(SourcesDict[CurrentSource]);
+                if(IndexOrderViewModel is null)
+                {
+                    IndexOrderViewModel = new IndexOrderViewModel();
+                }
+                else
+                    IndexOrderViewModel.Update();
                 LoadedSource = CurrentSource;
 
                 OnPropertyChanged(nameof(IndexOrderViewModel));
@@ -85,7 +99,7 @@ namespace CarService.DesktopClient.ViewModel
 
         public void SaveChanges()
         {
-            if (IndexOrderViewModel.NeedToSave)
+            if (!(IndexOrderViewModel is null) &&  IndexOrderViewModel.NeedToSave)
             {
                 if (MessageBox.Show("Есть несохраненные изменения. Сохранить?", "Сохранить изменения", MessageBoxButton.YesNoCancel, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {

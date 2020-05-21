@@ -149,6 +149,10 @@ namespace CarService.DesktopClient.Model
                         return null;
                     }
                 }
+                else
+                {
+                    throw new Exception("Не удалось получить доступ к базе данных");
+                }
             }
             catch (Exception e)
             {

@@ -2,6 +2,7 @@
 using CarService.DesktopClient.Model;
 using CarService.DesktopClient.View;
 using GalaSoft.MvvmLight.CommandWpf;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -36,37 +37,53 @@ namespace CarService.DesktopClient.ViewModel
 
         public IndexOrderViewModel()
         {
-            
-            Orders = new ObservableCollection<OrderViewModel>();
-            foreach(var o in AutoServiceModel_HttpRequests.GetOrders())
+            try
             {
-                var order = new OrderViewModel(o);
-                Orders.Add(order);
-            }
-            if(Orders.Count()>0)
-                CurrentOrder = Orders.First();
-            AddNewOrderCommand = new AddNewOrderCommand(this);
-            DeleteOrderCommand = new DeleteOrderCommand(this);
-
-            MouseDoubleClickCommand =  new RelayCommand<object>(
-                item =>
+                Orders = new ObservableCollection<OrderViewModel>();
+                foreach (var o in AutoServiceModel_HttpRequests.GetOrders())
                 {
-                    CurrentOrder.OpenOrderForm();
-                });
+                    var order = new OrderViewModel(o);
+                    Orders.Add(order);
+                }
+                if (Orders.Count() > 0)
+                    CurrentOrder = Orders.First();
+                AddNewOrderCommand = new AddNewOrderCommand(this);
+                DeleteOrderCommand = new DeleteOrderCommand(this);
+
+                MouseDoubleClickCommand = new RelayCommand<object>(
+                    item =>
+                    {
+                        CurrentOrder.OpenOrderForm();
+                    });
+
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
+
+
         public void Update()
-        {             
-            Orders = new ObservableCollection<OrderViewModel>();
-            foreach (var o in AutoServiceModel_HttpRequests.GetOrders())
+        {
+            try
             {
-                var order = new OrderViewModel(o); 
-                Orders.Add(order);
+                Orders = new ObservableCollection<OrderViewModel>();
+                foreach (var o in AutoServiceModel_HttpRequests.GetOrders())
+                {
+                    var order = new OrderViewModel(o);
+                    Orders.Add(order);
+                }
+                if (Orders.Count() > 0)
+                    CurrentOrder = Orders.First();
+                AddNewOrderCommand = new AddNewOrderCommand(this);
+                DeleteOrderCommand = new DeleteOrderCommand(this);
             }
-            if (Orders.Count() > 0)
-                CurrentOrder = Orders.First();
-            AddNewOrderCommand = new AddNewOrderCommand(this);
-            DeleteOrderCommand = new DeleteOrderCommand(this);
+            catch(Exception e)
+            {
+                throw new System.Exception(e.Message);
+            }
 
         }
 

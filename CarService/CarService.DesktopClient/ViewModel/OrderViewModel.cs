@@ -1,7 +1,7 @@
 ﻿using CarService.DataAccess.DTO;
 using CarService.DataAccess.Model;
 using CarService.DesktopClient.Commands;
-using CarService.DesktopClient.Model;
+using CarService.DesktopClient.Helpers;
 using CarService.DesktopClient.View;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -67,11 +67,18 @@ namespace CarService.DesktopClient.ViewModel
             if (NeedToSave)
             {
                 var id = order.ID;
-                AutoServiceModel_HttpRequests.AddOrder(order);
+                try
+                {
+                    AutoServiceRequestsHelper.AddOrder(order);
+                }
+                catch(Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
                 //чтобы получить правильный ID
                 if (id == 0)
                 {
-                    var cos = AutoServiceModel_HttpRequests.GetOrders();
+                    var cos = AutoServiceRequestsHelper.GetOrders();
                     var max = cos.Max(p => p.ID);
                     order = cos.First(p => p.ID == max);
                     OnPropertyChanged(nameof(ID));
@@ -82,7 +89,14 @@ namespace CarService.DesktopClient.ViewModel
 
         public void Delete()
         {
-            AutoServiceModel_HttpRequests.DeleteOrder(order.ID);
+            try
+            {
+                AutoServiceRequestsHelper.DeleteOrder(order.ID);
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
             NeedToSave = false;
         }
 

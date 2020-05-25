@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.CommandWpf;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -13,7 +14,14 @@ namespace CarService.DesktopClient.ViewModel
         public OrderFormViewModel(OrderViewModel order)
         {
             OrderViewModel = order;
-            IndexCarOwnerViewModel = new IndexCarOwnerViewModel();
+            try
+            {
+                IndexCarOwnerViewModel = new IndexCarOwnerViewModel();
+            }
+            catch(Exception e)
+            {
+                IndexCarOwnerViewModel = new IndexCarOwnerViewModel(true);
+            }
             if (IndexCarOwnerViewModel.CarOwners.Any(p => p.ID == order.OwnerID))
             {
                 IndexCarOwnerViewModel.CurrentOwner = IndexCarOwnerViewModel.CarOwners.First(p => p.ID == OrderViewModel.OwnerID);
@@ -29,11 +37,20 @@ namespace CarService.DesktopClient.ViewModel
 
         public void Save(Window window)
         {
-            IndexCarOwnerViewModel.Save();
-            //IndexCarOwnerViewModel.CurrentOwner.Save();
-            OrderViewModel.OwnerID = IndexCarOwnerViewModel.CurrentOwner.ID;
-            OrderViewModel.Save();
-            window.Close();
+            try
+            {
+                IndexCarOwnerViewModel.Save();
+                OrderViewModel.OwnerID = IndexCarOwnerViewModel.CurrentOwner.ID;
+                OrderViewModel.Save();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                window.Close();
+            }
         }
 
         

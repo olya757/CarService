@@ -1,5 +1,5 @@
 ﻿using CarService.DataAccess.DTO;
-using CarService.DesktopClient.Model;
+using CarService.DesktopClient.Helpers;
 using System;
 using System.Linq;
 
@@ -42,10 +42,17 @@ namespace CarService.DesktopClient.ViewModel
             if (NeedToSave)
             {
                 int id = carOwner.ID;
-                AutoServiceModel_HttpRequests.AddCarOwner(carOwner);
+                try
+                {
+                    AutoServiceRequestsHelper.AddCarOwner(carOwner);
+                }
+                catch(Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
                 if (id == 0)
                 {
-                    var cos = AutoServiceModel_HttpRequests.GetCarOwners();
+                    var cos = AutoServiceRequestsHelper.GetCarOwners();
                     var max = cos.Max(p => p.ID);
                     carOwner = cos.First(p => p.ID == max);
                     OnPropertyChanged(nameof(ID));

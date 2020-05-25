@@ -16,7 +16,6 @@ namespace CarService.DataAccess.Source
         public AutoServiceModel GetModel()
         {
             FileStream fs = new FileStream(Path, FileMode.OpenOrCreate);
-            // Construct a BinaryFormatter and use it to serialize the data to the stream.
             BinaryFormatter formatter = new BinaryFormatter();
             AutoServiceModel result;
             try
@@ -30,16 +29,12 @@ namespace CarService.DataAccess.Source
                 result = new AutoServiceModel(this);
                 SetModel(result);
             }
-            finally
-            {
-                //fs.Close();
-            }
+            
             return result;
         }
         public void SetModel(AutoServiceModel autoServiceModel)
         {
             FileStream fs = new FileStream(Path, FileMode.Create);
-            // Construct a BinaryFormatter and use it to serialize the data to the stream.
             BinaryFormatter formatter = new BinaryFormatter();
             formatter.Serialize(fs, autoServiceModel);
             fs.Close();

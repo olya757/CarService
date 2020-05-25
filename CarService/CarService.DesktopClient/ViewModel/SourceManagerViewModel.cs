@@ -1,5 +1,5 @@
 ﻿using CarService.DesktopClient.Commands;
-using CarService.DesktopClient.Model;
+using CarService.DesktopClient.Helpers;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
@@ -9,13 +9,7 @@ using System.Windows.Input;
 namespace CarService.DesktopClient.ViewModel
 {
     public class SourceManagerViewModel:ViewModel
-    {
-        public enum DataSourceType
-        {
-            db,
-            xml,
-            dat
-        }
+    {       
         public List<string> Sources { get; set; }
 
         public Dictionary<string, DataSourceType> SourcesDict { get; set; }
@@ -50,18 +44,11 @@ namespace CarService.DesktopClient.ViewModel
             SourcesDict[Sources[2]] = DataSourceType.dat;
             CurrentSource = Sources[0];
 
-            AutoServiceModel_HttpRequests.UpdateSource(SourcesDict[CurrentSource]);
-            try
-            {
-                IndexOrderViewModel = new IndexOrderViewModel();
-            }
-            catch(Exception e)
-            {
-                MessageBox.Show(e.Message);
-                
-            }
+            AutoServiceRequestsHelper.UpdateSource(SourcesDict[CurrentSource]);
+           
             LoadSelectedSourceCommand = new LoadSelectedSourceCommand(this);
             WindowClosingCommand = new RelayCommand(this.SaveChanges);
+            OnPropertyChanged(nameof(IndexOrderViewModel));
 
         }
 
@@ -76,25 +63,38 @@ namespace CarService.DesktopClient.ViewModel
         }
 
         public void LoadSelectedOrders()
-        {            
-            try
+        {   
+            SaveChanges();
+            AutoServiceRequestsHelper.UpdateSource(SourcesDict[CurrentSource]);
+            if (IndexOrderViewModel is null)
             {
-                SaveChanges();
-                AutoServiceModel_HttpRequests.UpdateSource(SourcesDict[CurrentSource]);
-                if(IndexOrderViewModel is null)
+                try
                 {
                     IndexOrderViewModel = new IndexOrderViewModel();
                 }
-                else
-                    IndexOrderViewModel.Update();
-                LoadedSource = CurrentSource;
-
-                OnPropertyChanged(nameof(IndexOrderViewModel));
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    IndexOrderViewModel = new IndexOrderViewModel(true);
+                }
             }
-            catch(Exception e)
+            else
             {
-                MessageBox.Show(e.Message);
+                try
+                {
+                    IndexOrderViewModel.Update();
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    IndexOrderViewModel.Update(true);
+                }
+
             }
+            LoadedSource = CurrentSource;
+
+            OnPropertyChanged(nameof(IndexOrderViewModel));
+          
         }
 
         public void SaveChanges()
@@ -103,7 +103,14 @@ namespace CarService.DesktopClient.ViewModel
             {
                 if (MessageBox.Show("Есть несохраненные изменения. Сохранить?", "Сохранить изменения", MessageBoxButton.YesNoCancel, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    IndexOrderViewModel.Save();
+                    try
+                    {
+                        IndexOrderViewModel.Save();
+                    }
+                    catch(Exception e)
+                    {
+                        MessageBox.Show(e.Message);
+                    }
                 }
             }
         }

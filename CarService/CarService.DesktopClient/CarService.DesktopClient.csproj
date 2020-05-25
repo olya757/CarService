@@ -184,7 +184,8 @@
     <Compile Include="Commands\LoadSelectedSourceCommand.cs" />
     <Compile Include="Commands\OpenOrderFormCommand.cs" />
     <Compile Include="Commands\SaveNewOrderCommand.cs" />
-    <Compile Include="Model\AutoServiceModel_HttpRequests.cs" />
+    <Compile Include="Helpers\AutoServiceRequestHelper.cs" />
+    <Compile Include="Helpers\DataSourceType.cs" />
     <Compile Include="ViewModel\CarOwnerViewModel.cs" />
     <Compile Include="ViewModel\IndexCarOwnerViewModel.cs" />
     <Compile Include="ViewModel\IndexOrderViewModel.cs" />

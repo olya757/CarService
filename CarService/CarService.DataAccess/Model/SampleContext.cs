@@ -12,13 +12,11 @@ namespace CarService.DataAccess.Model
        
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             Database.SetInitializer<SampleContext>(null);
 
             modelBuilder.Entity<Order>().HasKey(o => o.ID);
             modelBuilder.Entity<CarOwner>().HasKey(co => co.ID);
 
-            //Configure FK for one-to-many relationship
             modelBuilder.Entity<Order>()
             .HasRequired<CarOwner>(o => o.CarOwner)
             .WithMany(co => co.Orders)

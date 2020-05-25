@@ -1,6 +1,7 @@
 ﻿using CarService.DesktopClient.Commands;
 using System.Collections.ObjectModel;
-using CarService.DesktopClient.Model;
+using CarService.DesktopClient.Helpers;
+using System;
 
 namespace CarService.DesktopClient.ViewModel
 {
@@ -22,16 +23,29 @@ namespace CarService.DesktopClient.ViewModel
 
             }
         }
-        public IndexCarOwnerViewModel()
+        public IndexCarOwnerViewModel(bool createEmpty=false)
         {
             CarOwners = new ObservableCollection<CarOwnerViewModel>();
-            foreach(var co in AutoServiceModel_HttpRequests.GetCarOwners())
+            try
             {
-                var owner =new CarOwnerViewModel(co);
-                owner.PropertyChanged += Owner_PropertyChanged;
-                CarOwners.Add(owner);
+                if (!createEmpty)
+                {
+                    foreach (var co in AutoServiceRequestsHelper.GetCarOwners())
+                    {
+                        var owner = new CarOwnerViewModel(co);
+                        owner.PropertyChanged += Owner_PropertyChanged;
+                        CarOwners.Add(owner);
+                    }
+                }
             }
-            AddCarOwnerCommand = new AddCarOwnerCommand(this);
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                AddCarOwnerCommand = new AddCarOwnerCommand(this);
+            }
         }
 
         public AddCarOwnerCommand AddCarOwnerCommand { get; set; }
@@ -44,16 +58,22 @@ namespace CarService.DesktopClient.ViewModel
         public void AddCarOwner()
         {            
             var carOwner = new CarOwnerViewModel();
-            //carOwner.Save();
             CarOwners.Add(carOwner);
             CurrentOwner = carOwner;
         }
 
         public void Save()
         {
-            foreach(var co in CarOwners)
+            try
             {
-                co.Save();
+                foreach (var co in CarOwners)
+                {
+                    co.Save();
+                }
+            }
+            catch(Exception e)
+            {
+                throw e;
             }
         }
     }

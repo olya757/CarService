@@ -58,7 +58,6 @@
   <ItemGroup>
     <Compile Include="DataAccess\CarOwnerDAL.cs" />
     <Compile Include="DataAccess\CarOwnerDAL_file.cs" />
-    <Compile Include="DataAccess\DataRepository.cs" />
     <Compile Include="DataAccess\IDataRepository.cs" />
     <Compile Include="DataAccess\OrderDAL.cs" />
     <Compile Include="DataAccess\OrderDAL_file.cs" />
@@ -75,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="DataBase\CarServiceDB.bak" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="EntityFramework">

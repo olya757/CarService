@@ -6,9 +6,8 @@
         xmlns:local="clr-namespace:CarService.DesktopClient.View"
         xmlns:wpftc1="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="OrderFormWindow" x:Name="window" WindowStartupLocation="CenterScreen" Height="600" Width="900">
+        Title="Форма заказа" x:Name="window" WindowStartupLocation="CenterScreen" MinHeight="600" MinWidth="900" Height="600" Width="900">
     <Grid>
-
           <Grid Background="White" Margin="15" >
             <Grid.Resources>
                 <Style TargetType="TextBox">
@@ -125,11 +124,11 @@
 
                 <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding IndexCarOwnerViewModel.CarOwners}" SelectedItem="{Binding IndexCarOwnerViewModel.CurrentOwner}" Grid.RowSpan="7" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname, UpdateSourceTrigger=LostFocus}"/>
-                        <DataGridTextColumn Header="Имя" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}"/>
-                        <DataGridTextColumn Header="Отчество" Binding="{Binding SecondName, UpdateSourceTrigger=LostFocus}"/>
-                        <DataGridTextColumn Header="Дата рождения" Binding="{Binding Birthday, Mode=OneWay}"/>
-                        <DataGridTextColumn Header="Телефон" Binding="{Binding Phone, UpdateSourceTrigger=LostFocus}"/>
+                        <DataGridTextColumn MinWidth="60" Width="60*" Header="Фамилия" Binding="{Binding Surname, UpdateSourceTrigger=LostFocus}"/>
+                        <DataGridTextColumn MinWidth="40" Width="40*" Header="Имя" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}"/>
+                        <DataGridTextColumn MinWidth="65" Width="65*" Header="Отчество" Binding="{Binding SecondName, UpdateSourceTrigger=LostFocus}"/>
+                        <DataGridTextColumn MinWidth="80" Width="80*" Header="Дата рождения" Binding="{Binding Birthday, Mode=OneWay}"/>
+                        <DataGridTextColumn MinWidth="70" Width="70*" Header="Телефон" Binding="{Binding Phone, UpdateSourceTrigger=LostFocus}"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <Button Grid.Row="8" Grid.Column="1" HorizontalAlignment="Right" Padding="5" VerticalAlignment="Center" Command="{Binding IndexCarOwnerViewModel.AddCarOwnerCommand}" Content="Добавить нового"/>

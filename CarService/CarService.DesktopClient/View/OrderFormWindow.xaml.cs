@@ -11,6 +11,5 @@ namespace CarService.DesktopClient.View
         {
             InitializeComponent();
         }
-
     }
 }

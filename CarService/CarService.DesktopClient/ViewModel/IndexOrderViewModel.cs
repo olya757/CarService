@@ -1,10 +1,11 @@
 ﻿using CarService.DesktopClient.Commands;
-using CarService.DesktopClient.Model;
+using CarService.DesktopClient.Helpers;
 using CarService.DesktopClient.View;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace CarService.DesktopClient.ViewModel
@@ -34,18 +35,32 @@ namespace CarService.DesktopClient.ViewModel
             }
         }
 
-        public IndexOrderViewModel()
+        public IndexOrderViewModel(bool createEmpty=false)
         {
+            Orders = new ObservableCollection<OrderViewModel>();
             try
             {
-                Orders = new ObservableCollection<OrderViewModel>();
-                foreach (var o in AutoServiceModel_HttpRequests.GetOrders())
+                if (!createEmpty)
                 {
-                    var order = new OrderViewModel(o);
-                    Orders.Add(order);
+                    foreach (var o in AutoServiceRequestsHelper.GetOrders())
+                    {
+                        var order = new OrderViewModel(o);
+                        Orders.Add(order);
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
                 if (Orders.Count() > 0)
                     CurrentOrder = Orders.First();
+                else
+                {
+                    CurrentOrder = null;
+                }
                 AddNewOrderCommand = new AddNewOrderCommand(this);
                 DeleteOrderCommand = new DeleteOrderCommand(this);
 
@@ -54,34 +69,38 @@ namespace CarService.DesktopClient.ViewModel
                     {
                         CurrentOrder.OpenOrderForm();
                     });
-
-            }
-            catch(Exception e)
-            {
-                throw new Exception(e.Message);
             }
         }
 
 
 
-        public void Update()
+        public void Update(bool updateempty=false)
         {
+            Orders = new ObservableCollection<OrderViewModel>();
             try
             {
-                Orders = new ObservableCollection<OrderViewModel>();
-                foreach (var o in AutoServiceModel_HttpRequests.GetOrders())
+                if (!updateempty)
                 {
-                    var order = new OrderViewModel(o);
-                    Orders.Add(order);
+                    foreach (var o in AutoServiceRequestsHelper.GetOrders())
+                    {
+                        var order = new OrderViewModel(o);
+                        Orders.Add(order);
+                    }
                 }
-                if (Orders.Count() > 0)
-                    CurrentOrder = Orders.First();
-                AddNewOrderCommand = new AddNewOrderCommand(this);
-                DeleteOrderCommand = new DeleteOrderCommand(this);
+                
             }
             catch(Exception e)
             {
-                throw new System.Exception(e.Message);
+                throw e;
+            }
+            finally
+            {
+                if (Orders.Count() > 0)
+                    CurrentOrder = Orders.First();
+                else
+                {
+                    CurrentOrder = null;
+                }
             }
 
         }
@@ -109,7 +128,14 @@ namespace CarService.DesktopClient.ViewModel
         {
             if (!(CurrentOrder is null))
             {
-                CurrentOrder.Delete();
+                try
+                {
+                    CurrentOrder.Delete();
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
                 Orders.Remove(CurrentOrder);
                 CurrentOrder = null;
             }
@@ -119,10 +145,12 @@ namespace CarService.DesktopClient.ViewModel
 
         public void Save()
         {
-            foreach(var o in Orders)
-            {
-                o.Save();
-            }
+           
+                foreach (var o in Orders)
+                {
+                    o.Save();
+                }
+            
         }
 
         public void OpenOrderForm()

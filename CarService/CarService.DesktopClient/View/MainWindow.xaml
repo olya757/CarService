@@ -11,7 +11,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:clr="clr-namespace:CarService.DesktopClient.Commands"
         mc:Ignorable="d"
-        Title="MainWindow"  WindowState="Maximized" Width="{DynamicResource {x:Static SystemParameters.MaximizedPrimaryScreenWidthKey}}" Height="500">
+        Title="Агрегатор данных от автосервисов"  WindowState="Maximized" MinWidth="1366" MinHeight="800"  >
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
             <i:InvokeCommandAction  Command="{Binding WindowClosingCommand}" />
@@ -38,18 +38,18 @@
           SelectionUnit="FullRow"  x:Name="dgOrders" CanUserAddRows="False"  ScrollViewer.HorizontalScrollBarVisibility="Auto" AutoGenerateColumns="False" Grid.Row="1" ItemsSource="{Binding IndexOrderViewModel.Orders}" SelectedItem="{Binding IndexOrderViewModel.CurrentOrder}" clr:Commands.DataGridDoubleClickCommand="{Binding IndexOrderViewModel.MouseDoubleClickCommand}" >
                 
                 <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding ID, Mode=OneWay}"/>
-                <DataGridTextColumn Header="Марка авто" Binding="{Binding CarBrand, UpdateSourceTrigger=LostFocus}"/>
-                <DataGridTextColumn Header="Модель авто" Binding="{Binding CarModel, UpdateSourceTrigger=LostFocus}"/>
-                <DataGridTextColumn Header="Год выпуска" Binding="{Binding YearOfManufacture, UpdateSourceTrigger=LostFocus}"/>
-                    <DataGridTextColumn Header="Тип трансмиссии" Binding="{Binding TypeOfTransmission, Mode=OneWay}"/>
-                <DataGridTextColumn Header="Мощность двигателя (л.с.)" Binding="{Binding EnginePower, UpdateSourceTrigger=LostFocus}"/>
-                <DataGridTextColumn Header="Наименование работ" Binding="{Binding NameOfWorks, UpdateSourceTrigger=LostFocus}"/>
-                <DataGridTextColumn Header="Время начала работ" Binding="{Binding DateOfStart, Mode=OneWay}">
+                <DataGridTextColumn MinWidth="22"  Width="Auto" Header="ID" Binding="{Binding ID, Mode=OneWay}"/>
+                <DataGridTextColumn MinWidth="75" Width="75*" Header="Марка авто" Binding="{Binding CarBrand, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn MinWidth="80" Width="80*" Header="Модель авто" Binding="{Binding CarModel, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn MinWidth="80" Width="80*" Header="Год выпуска" Binding="{Binding YearOfManufacture, UpdateSourceTrigger=LostFocus}"/>
+                    <DataGridTextColumn MinWidth="105" Width="105*" Header="Тип трансмиссии" Binding="{Binding TypeOfTransmission, Mode=OneWay}"/>
+                <DataGridTextColumn MinWidth="155" Width="155*" Header="Мощность двигателя (л.с.)" Binding="{Binding EnginePower, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn MinWidth="130" Width="130*" Header="Наименование работ" Binding="{Binding NameOfWorks, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn MinWidth="130" Width="120*" Header="Время начала работ" Binding="{Binding DateOfStart, Mode=OneWay}">
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Время окончания работ" Binding="{Binding DateOfFinish, Mode=OneWay}">
+                <DataGridTextColumn MinWidth="130" Width="120*" Header="Время окончания работ" Binding="{Binding DateOfFinish, Mode=OneWay}">
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Стоимость работ (руб.)" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn MinWidth="130" Width="120*" Header="Стоимость работ (руб.)" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}"/>
             </DataGrid.Columns>
                 <DataGrid.InputBindings>
                     <MouseBinding MouseAction="LeftDoubleClick"

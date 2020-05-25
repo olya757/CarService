@@ -70,8 +70,7 @@ namespace CarService.DataAccess.Model
 
         [IgnoreDataMember]
         [ForeignKey("OwnerID")]
-        public CarOwner CarOwner { get; set; }
-        
+        public CarOwner CarOwner { get; set; }  
 
     }
 }
